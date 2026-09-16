@@ -1,6 +1,6 @@
 body {
-    background-color: #ffaaff;
-    color: whitesmoke;
+    background-color: #209484;
+    color: rgb(18, 128, 130);
 }
 
 img{
@@ -16,9 +16,12 @@ font-size: 0.9em;
 
 .subparrafo{
     font-size:1.2em;
-    color: magenta;
+    color: rgb(52, 52, 52);
 }
 
 final{
 
 }
+div {
+
+  text-align: center; }
