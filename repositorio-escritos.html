@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repositorio de escritos | Ciudad Bolívar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <nav class="barra-navegacion">
+    <a href="index.html">Inicio</a>
+    <a href="sobre-nosotros.html">Sobre nosotros</a>
+    <a href="index.html#interes">Le podría interesar</a>
+  </nav>
+
+  <main class="pagina-repositorio-escritos">
+    <h1>Repositorio de escritos</h1>
+    <p class="introduccion-repositorio">Lee escritos sobre la memoria y la organización de Ciudad Bolívar, página por página en nuestro libro digital. Elige “Leer escrito” para abrir cualquiera de los documentos.</p>
+
+    <article class="escrito-destacado">
+      <div>
+        <h2>Emigrantes urbanos - Asentamientos en la periferia; memoria y organización política en el Barrio Jerusalén (Localidad de Ciudad Bolívar)</h2>
+        <p><strong>Autor:</strong> Cardona Martínez, John Hames</p>
+        <p>Estudio sobre la memoria de la organización política del barrio Jerusalén entre 1980 y 2016.</p>
+        <p class="licencia-escrito">
+          Compartido sin modificaciones con atribución y para uso no comercial bajo la licencia
+          <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" target="_blank" rel="noopener noreferrer">Creative Commons CC BY-NC-ND 4.0</a>.
+          <a href="https://repository.udistrital.edu.co/items/d5e98561-0c62-4514-b179-a0c93d064461" target="_blank" rel="noopener noreferrer">Ver ficha original en el repositorio de la Universidad Distrital</a>.
+        </p>
+      </div>
+      <button class="boton-abrir-escrito" id="abrir-escrito-destacado" type="button">
+        Leer escrito
+      </button>
+    </article>
+
+    <article class="escrito-destacado">
+      <div>
+        <h2>Diálogos entre lo teórico y lo experiencial: reasentamiento poblacional, ciudad informal y construcción territorial</h2>
+        <p>Lee este escrito página por página en el libro digital.</p>
+        <p class="licencia-escrito">
+          <a href="https://bdigital.uexternado.edu.co/entities/publication/87019d97-41c9-4fb8-bca2-a33793916632" target="_blank" rel="noopener noreferrer">Ver ficha original en el repositorio de la Universidad Externado</a>
+        </p>
+      </div>
+      <button class="boton-abrir-escrito" id="abrir-escrito-externado" type="button">
+        Leer escrito
+      </button>
+    </article>
+
+    <article class="escrito-destacado">
+      <div>
+        <h2>Manual para la construcción por autogestión comunitaria</h2>
+        <p><strong>Autor:</strong> Servicio Nacional de Aprendizaje (SENA), División General de Industria y de la Construcción</p>
+        <p><strong>Fecha:</strong> 1991</p>
+        <p class="licencia-escrito">
+          Derechos reservados - SENA. PDF compartido con autorización para incluirlo en este proyecto.
+          <a href="https://babel.banrepcultural.org/digital/collection/p17054coll22/id/146" target="_blank" rel="noopener noreferrer">Ver ficha original</a>.
+        </p>
+      </div>
+      <button class="boton-abrir-escrito" id="abrir-escrito-autogestion" type="button">
+        Leer escrito
+      </button>
+    </article>
+
+    <article class="escrito-destacado">
+      <div>
+        <h2>Asentamientos humanos y construcción autogestionada</h2>
+        <p><strong>Autor:</strong> Servicio Nacional de Aprendizaje (SENA)</p>
+        <p><strong>Fecha:</strong> 1989</p>
+        <p>Recopila experiencias de autoconstrucción y capacitación para mejorar viviendas en asentamientos humanos de alto riesgo, con énfasis en organización comunitaria.</p>
+        <p class="licencia-escrito">
+          Derechos Reservados de Autor. PDF compartido con autorización para incluirlo en este proyecto.
+          <a href="https://babel.banrepcultural.org/digital/collection/p17054coll22/id/428" target="_blank" rel="noopener noreferrer">Ver ficha original</a>.
+        </p>
+      </div>
+      <button class="boton-abrir-escrito" id="abrir-escrito-asentamientos" type="button">
+        Leer escrito
+      </button>
+    </article>
+
+    <article class="escrito-destacado">
+      <div>
+        <h2>Urban acupuncture as a slum upgrading process. How to tackle poverty effectively in a multidimensional way: the case of Ciudad Bolívar, Bogotá</h2>
+        <p><strong>Autora:</strong> Natalia Silva Mora</p>
+        <p><strong>Fecha:</strong> 2013 · Tesis de maestría, University College London</p>
+        <p class="licencia-escrito">
+          © Derechos reservados del autor. PDF compartido con autorización para incluirlo en este proyecto.
+          <a href="https://babel.banrepcultural.org/digital/collection/p17054coll23/id/34" target="_blank" rel="noopener noreferrer">Ver ficha original en la Biblioteca Virtual del Banco de la República</a>.
+        </p>
+      </div>
+      <button class="boton-abrir-escrito" id="abrir-escrito-urban-acupuncture" type="button">
+        Leer escrito
+      </button>
+    </article>
+
+    <section class="selector-escrito" aria-labelledby="titulo-selector-escrito" hidden>
+      <h2 id="titulo-selector-escrito">Elige un escrito</h2>
+
+      <div class="caja-url-escrito">
+        <label for="url-escrito">Pega la URL directa del PDF para leerlo aquí:</label>
+        <div class="entrada-url-escrito">
+          <input id="url-escrito" type="url" placeholder="https://ejemplo.com/documento.pdf" autocomplete="off">
+          <button id="abrir-url-escrito" type="button">Abrir desde enlace</button>
+        </div>
+      </div>
+
+      <label for="archivo-escrito">O selecciona un archivo PDF de tu dispositivo:</label>
+      <input id="archivo-escrito" type="file" accept="application/pdf,.pdf">
+      <p class="nota-repositorio">Los PDF se abren en tu navegador. El archivo seleccionado desde tu dispositivo no se sube a internet. Si el repositorio bloquea la carga directa, descarga el PDF y selecciónalo desde tu equipo.</p>
+    </section>
+
+    <p class="estado-lector" id="estado-lector" role="status" aria-live="polite">Elige “Leer escrito” para comenzar.</p>
+
+    <section class="lector-libro" aria-label="Lector de PDF">
+      <div class="libro-marco">
+        <div class="pagina-libro" id="pagina-libro">
+          <canvas id="pagina-pdf" aria-label="Página del escrito" hidden></canvas>
+          <p class="indicacion-libro" id="indicacion-libro">Tu escrito aparecerá aquí, página por página.</p>
+        </div>
+      </div>
+      <div class="controles-libro">
+        <button id="pagina-anterior" type="button" disabled aria-label="Ir a la página anterior">← Anterior</button>
+        <span id="contador-paginas" aria-live="polite">Página 0 de 0</span>
+        <button id="pagina-siguiente" type="button" disabled aria-label="Ir a la página siguiente">Siguiente →</button>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="lector-escritos.js"></script>
+</body>
+</html>

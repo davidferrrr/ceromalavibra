@@ -1,7 +1,42 @@
-body {
-    background-color: #209484;
-    color: rgb(18, 128, 130);
+* {
+  box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #0b2416;
+  color: #f1f1f1;
+}
+
+/* Estilos para la barra de navegación superior */
+.barra-navegacion {
+  width: 100%;
+  background-color: #0c6903d3;
+  padding: 15px 0;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 5px rgba(6, 102, 34, 0.884); /* Sombra suave */
+}
+
+.barra-navegacion a {
+  color: #fdf7f7; /* Color del texto de los enlaces */
+  text-decoration: none; /* Quita el subrayado por defecto */
+  margin: 0 20px; /* Espaciado entre las opciones */
+  font-family: "Bona Nova SC", serif;
+  font-weight: bold;
+}
+
+.barra-navegacion a:hover {
+  color: #3ce04b; /* Cambia de color al pasar el cursor */
+}
+ 
+    h1 {
+      text-align: center;
+    }
+ 
 
 img{
     width:200px;
@@ -9,14 +44,23 @@ img{
 }
 
 p{
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: "Old Standard TT", serif;
 font-size: 0.9em;
 
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bona Nova SC", serif;
+}
+
 .subparrafo{
     font-size:1.2em;
-    color: rgb(52, 52, 52);
+    color: rgb(15, 6, 6);
 }
 
 final{
@@ -25,3 +69,655 @@ final{
 div {
 
   text-align: center; }
+
+  /* Estilos de la barra superior */
+.barra-superior {
+  background-color: #27ae60;
+  padding: 12px;
+  margin-bottom: 20px;
+}
+
+.barra-superior a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+.barra-superior a:hover {
+  text-decoration: underline;
+}
+
+/* Contenedor del menú desplegable */
+.menu-contenedor {
+  margin: 20px auto;
+}
+
+/* Ocultar el checkbox de control */
+.menu-checkbox {
+  display: none;
+}
+
+/* Estilo del botón "Menú" */
+.menu-boton {
+  display: inline-block;
+  background-color: #12a112;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2em;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s;
+}
+
+.menu-boton:hover {
+  background-color: #0b2416;
+}
+
+/* Ocultar las opciones del menú por defecto */
+.opciones-menu {
+  display: none;
+  flex-direction: column;
+  margin-top: 15px;
+  gap: 8px;
+}
+
+/* MAGIA: Al hacer clic en el botón (marcar el checkbox), se despliegan las opciones */
+.menu-checkbox:checked ~ .opciones-menu {
+  display: flex;
+}
+
+/* Estilos de los textos y enlaces del menú desplegado */
+.subparrafo a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 1.1em;
+}
+
+.subparrafo a:hover {
+  color: #256d2c;
+  text-decoration: underline;
+}
+
+/* Estilo de la imagen del chigüiro */
+img {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.contenedor-titulo-fondo {
+  position: relative;
+  width: 100%;
+  background-image: url('Imagenes/IMG_20250607_165804_640@-1305955089.jpg');
+  background-size: cover; /* Asegura que la imagen cubra todo el espacio */
+  background-position: center;
+  padding: 60px 20px;
+  margin-top: -20px;
+  overflow: hidden;
+}
+
+.contenedor-menu-fondo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 240px;
+  padding: 20px;
+  background-color: #18231f;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.38)),
+    url("./Imagenes/IMG_20260621_180504_914@-2090904604.jpg");
+  background-size: cover;
+  background-position: center 65%;
+}
+
+.contenedor-menu-fondo .menu-contenedor {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  margin: 0 auto;
+}
+
+/* LA CLAVE: Creamos una capa oscura transparente sobre la imagen (Overlay) */
+.contenedor-titulo-fondo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Degradado oscuro (con 60% de opacidad) que oscurece la foto */
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+  z-index: 1; /* Pone esta capa sobre la foto */
+}
+
+.titulo-principal {
+  position: relative;
+  z-index: 2; /* Pone el texto sobre la capa oscura (overlay) */
+  color: white; /* Asegura que el texto sea blanco para contrastar */
+  font-size: 3em; /* Tamaño grande para el título */
+  margin: 0; /* Quita márgenes por defecto */
+  font-weight: bold;
+  /* Efecto de sombra para garantizar 100% legibilidad */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* --- Estilos para la sección de contenido en dos columnas --- */
+
+.seccion-principal {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px; /* Espacio entre columnas */
+  justify-content: center;
+}
+
+/* Caja de la izquierda (Descripción) */
+.caja-descripcion {
+  flex: 2; /* Ocupa más espacio horizontal */
+  min-width: 280px;
+  background-color: rgba(255, 255, 255, 0.08); /* Fondo sutil translúcido */
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 25px;
+  text-align: left;
+}
+
+.caja-descripcion h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #3ce04b; /* Color de acento */
+}
+
+.caja-descripcion p {
+  line-height: 1.6;
+  color: #f1f1f1;
+}
+
+/* Columna de la derecha (Tarjetas del boceto) */
+/* --- Estilos para la tarjeta del Mapa Interactivo --- */
+.tarjeta-mapa {
+  width: 100%;
+  height: 180px; /* Altura del recuadro del mapa */
+  border-radius: 12px;
+  overflow: hidden; /* Oculta los bordes sobrantes del mapa */
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.tarjeta-mapa iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.seccion-audios {
+  flex: 1;
+  min-width: 280px;
+  max-width: 480px;
+  box-sizing: border-box;
+  margin: 0 0 40px;
+  padding: 25px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.04);
+  text-align: left;
+}
+
+.seccion-audios h2 {
+  color: #3ce04b;
+}
+
+.recuadro-audio {
+  margin-bottom: 10px;
+  padding: 14px 16px;
+  border: 1px solid rgba(60, 224, 75, 0.55);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.recuadro-audio summary {
+  color: #f1f1f1;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.recuadro-audio audio {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.enlace-exposicion {
+  display: inline-block;
+  margin-top: 12px;
+  color: #3ce04b;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.enlace-exposicion:hover {
+  color: #f1f1f1;
+  text-decoration: underline;
+}
+
+.pagina-sobre-nosotros > h1 {
+  margin: 40px 20px 0;
+  color: #3ce04b;
+}
+
+.pagina-espacios-recreativos {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.pagina-espacios-recreativos > h1 {
+  margin: 0 0 12px;
+  color: #3ce04b;
+}
+
+.introduccion-espacios {
+  max-width: 760px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+
+.galeria-espacios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 24px;
+  text-align: left;
+}
+
+.tarjeta-espacio {
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.imagen-espacio-vacia {
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+  padding: 20px;
+  border-bottom: 1px dashed rgba(60, 224, 75, 0.55);
+  background-color: rgba(0, 0, 0, 0.18);
+  color: #c4d1c4;
+  text-align: center;
+}
+
+.texto-espacio {
+  padding: 20px;
+}
+
+.texto-espacio h2 {
+  margin: 0 0 10px;
+  color: #3ce04b;
+}
+
+.texto-espacio p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.pagina-repositorio-escritos {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.pagina-repositorio-escritos > h1 {
+  margin: 0 0 10px;
+  color: #3ce04b;
+}
+
+.introduccion-repositorio {
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+
+.escrito-destacado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto 20px;
+  padding: 22px;
+  border: 1px solid rgba(60, 224, 75, 0.5);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.06);
+  text-align: left;
+}
+
+.escrito-destacado h2 {
+  margin: 0 0 12px;
+  color: #3ce04b;
+}
+
+.escrito-destacado p {
+  margin: 8px 0;
+  line-height: 1.55;
+}
+
+.licencia-escrito {
+  color: #c4d1c4;
+  font-size: 0.9em;
+}
+
+.licencia-escrito a {
+  color: #8fe39a;
+}
+
+.boton-abrir-escrito {
+  flex: 0 0 auto;
+  padding: 12px 18px;
+  border: 1px solid #3ce04b;
+  border-radius: 7px;
+  background-color: #12612e;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Bona Nova SC", serif;
+}
+
+.boton-abrir-escrito:hover:not(:disabled) {
+  background-color: #16833b;
+}
+
+.boton-abrir-escrito:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.selector-escrito {
+  max-width: 760px;
+  margin: 0 auto 18px;
+  padding: 20px;
+  border: 1px solid rgba(60, 224, 75, 0.5);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.06);
+  text-align: left;
+}
+
+.selector-escrito h2 {
+  margin: 0 0 12px;
+  color: #3ce04b;
+}
+
+.selector-escrito label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.caja-url-escrito {
+  margin-bottom: 18px;
+}
+
+.entrada-url-escrito {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.entrada-url-escrito input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(60, 224, 75, 0.45);
+  border-radius: 8px;
+  background-color: rgba(6, 20, 12, 0.3);
+  color: #f4f4f1;
+  font-family: "Old Standard TT", serif;
+}
+
+.entrada-url-escrito button,
+.selector-escrito input[type="file"]::file-selector-button {
+  padding: 9px 14px;
+  border: 0;
+  border-radius: 6px;
+  background-color: #16833b;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Bona Nova SC", serif;
+}
+
+.selector-escrito input[type="file"] {
+  max-width: 100%;
+  color: #f1f1f1;
+  font-family: "Old Standard TT", serif;
+}
+
+.selector-escrito input[type="file"]::file-selector-button {
+  margin-right: 12px;
+}
+
+@media (max-width: 600px) {
+  .entrada-url-escrito {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.nota-repositorio {
+  margin: 14px 0 0;
+  color: #c4d1c4;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.estado-lector {
+  min-height: 1.5em;
+  color: #d8ead7;
+}
+
+.estado-lector.error {
+  color: #ffc2b8;
+}
+
+.lector-libro {
+  max-width: 1200px;
+  margin: 0 auto 48px;
+}
+
+.libro-marco {
+  display: grid;
+  min-height: 620px;
+  height: min(86vh, 980px);
+  place-items: center;
+  padding: 28px;
+  border: 12px solid #5d3a20;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #382515, #76502f 3%, #4d321f 7%, #5d3a20);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
+}
+
+.pagina-libro {
+  display: grid;
+  width: min(100%, 820px);
+  height: 100%;
+  place-items: center;
+  overflow: hidden;
+  border-left: 8px solid #d6c8a8;
+  border-radius: 3px 8px 8px 3px;
+  background: #f7f2e7;
+  box-shadow: 3px 0 7px rgba(0, 0, 0, 0.3);
+  transform-origin: left center;
+}
+
+.pagina-libro canvas {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(48, 37, 23, 0.2);
+}
+
+.pagina-libro canvas[hidden] {
+  display: none;
+}
+
+.indicacion-libro {
+  max-width: 360px;
+  padding: 24px;
+  color: #55462e;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.indicacion-libro[hidden] {
+  display: none;
+}
+
+.pasando-siguiente {
+  animation: pasar-pagina-siguiente 320ms ease;
+}
+
+.pasando-anterior {
+  animation: pasar-pagina-anterior 320ms ease;
+}
+
+@keyframes pasar-pagina-siguiente {
+  50% { opacity: 0.65; transform: perspective(900px) rotateY(-4deg); }
+}
+
+@keyframes pasar-pagina-anterior {
+  50% { opacity: 0.65; transform: perspective(900px) rotateY(4deg); }
+}
+
+.controles-libro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 18px;
+}
+
+.controles-libro button {
+  padding: 10px 18px;
+  border: 1px solid #3ce04b;
+  border-radius: 7px;
+  background-color: #12612e;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Bona Nova SC", serif;
+}
+
+.controles-libro button:hover:not(:disabled) {
+  background-color: #16833b;
+}
+
+.controles-libro button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.controles-libro span {
+  min-width: 110px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pasando-siguiente,
+  .pasando-anterior {
+    animation: none;
+  }
+}
+
+.seccion-sobre-nosotros {
+  display: flex;
+  align-items: stretch;
+  gap: 25px;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: left;
+}
+
+.caja-texto-sobre,
+.recuadro-imagen-sobre {
+  flex: 1;
+  min-width: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.caja-texto-sobre {
+  padding: 25px;
+}
+
+.caja-texto-sobre h2 {
+  margin-top: 0;
+  color: #3ce04b;
+}
+
+.caja-texto-sobre p {
+  line-height: 1.6;
+}
+
+.recuadro-imagen-sobre {
+  min-height: 240px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.recuadro-imagen-sobre img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  margin: 0;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+@media (max-width: 650px) {
+  .seccion-audios {
+    max-width: none;
+    margin-bottom: 0;
+  }
+
+  .seccion-sobre-nosotros {
+    flex-direction: column;
+  }
+
+  .pagina-espacios-recreativos {
+    margin: 28px auto;
+    padding: 0 16px;
+  }
+
+  .pagina-repositorio-escritos {
+    margin: 28px auto;
+    padding: 0 16px;
+  }
+
+  .escrito-destacado {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .libro-marco {
+    min-height: 480px;
+    height: 78vh;
+    padding: 14px;
+    border-width: 7px;
+  }
+
+  .controles-libro {
+    gap: 10px;
+  }
+
+  .controles-libro button {
+    padding: 9px 12px;
+  }
+
+}
