@@ -258,7 +258,7 @@ img {
     linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.52)),
     url("imagenes/IMG_20260621_180504_914@-2090904604.jpg");
   background-size: cover;
-  background-position: center bottom;
+  background-position: center 60%;
   background-repeat: no-repeat;
   overflow: hidden;
   margin-top: 40px;
@@ -268,21 +268,34 @@ img {
   position: relative;
   z-index: 1;
   text-align: center;
+  max-width: 720px;
+  padding: 0 20px;
 }
 
 .pie-titulo {
   margin: 0;
   color: #f5f5f5;
-  font-size: 2.2em;
+  font-size: 2.4em;
   font-family: "Bona Nova SC", serif;
   letter-spacing: 0.04em;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .pie-subtitulo {
-  margin: 8px 0 0;
-  color: #dfeadf;
+  margin: 10px 0 0;
+  color: #f1f1f1;
   font-size: 1.1em;
   font-family: "Old Standard TT", serif;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
+}
+
+.pie-detalle {
+  margin: 6px 0 0;
+  color: #e7efe7;
+  font-size: 0.95em;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: 0.04em;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
 }
 
 @keyframes titleIn {
