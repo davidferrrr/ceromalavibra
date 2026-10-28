@@ -152,9 +152,11 @@ img {
 .contenedor-titulo-fondo {
   position: relative;
   width: 100%;
+  min-height: 280px;
   background-image: url("imagenes/IMG_20250607_165832_235@-1854612948.jpg");
-  background-size: cover; /* Asegura que la imagen cubra todo el espacio */
-  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 38%;
   padding: 60px 20px;
   margin-top: -20px;
   overflow: hidden;
