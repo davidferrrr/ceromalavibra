@@ -256,7 +256,7 @@ img {
   padding: 40px 20px 30px;
   background-image:
     linear-gradient(rgba(6, 17, 10, 0.5), rgba(6, 17, 10, 0.75)),
-    url("imagenes/Versi%C3%B3n%20footer.jpg");
+    url("https://raw.githubusercontent.com/davidferrrr/ceromalavibra/main/imagenes/Versi%C3%B3n%20footer.jpg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
