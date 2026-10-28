@@ -32,11 +32,11 @@ body {
 .barra-navegacion a:hover {
   color: #3ce04b; /* Cambia de color al pasar el cursor */
 }
- 
+  
     h1 {
       text-align: center;
     }
- 
+
 
 img{
     width:200px;
@@ -45,7 +45,7 @@ img{
 
 p{
     font-family: "Old Standard TT", serif;
-font-size: 0.9em;
+ font-size: 0.9em;
 
 }
 
@@ -152,7 +152,7 @@ img {
 .contenedor-titulo-fondo {
   position: relative;
   width: 100%;
-  background-image: url('Imagenes/IMG_20250607_165804_640@-1305955089.jpg');
+  background-image: url("Imagenes/Portada");
   background-size: cover; /* Asegura que la imagen cubra todo el espacio */
   background-position: center;
   padding: 60px 20px;
@@ -170,7 +170,7 @@ img {
   background-color: #18231f;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.38)),
-    url("./Imagenes/IMG_20260621_180504_914@-2090904604.jpg");
+    url("Imagenes/Portada 2");
   background-size: cover;
   background-position: center 65%;
 }
