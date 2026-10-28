@@ -207,6 +207,10 @@ img {
   background-size: cover;
   background-position: center 65%;
   box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.2);
+  transition: background-position 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+}
+
+.contenedor-menu-fondo.menu-abierto {
   animation: fondoMenu 8s ease-in-out infinite alternate;
 }
 
