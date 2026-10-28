@@ -207,6 +207,7 @@ img {
   background-size: cover;
   background-position: center 65%;
   box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.2);
+  animation: fondoMenu 8s ease-in-out infinite alternate;
 }
 
 .contenedor-menu-fondo .menu-contenedor {
@@ -269,6 +270,19 @@ img {
     background-position: center 76%;
     filter: saturate(1.1) contrast(1.06) brightness(1);
     transform: scale(1.06);
+  }
+}
+
+@keyframes fondoMenu {
+  0% {
+    background-position: center 62%;
+    transform: scale(1);
+    filter: saturate(0.9) contrast(1.05);
+  }
+  100% {
+    background-position: center 68%;
+    transform: scale(1.04);
+    filter: saturate(1.1) contrast(1.08);
   }
 }
 
