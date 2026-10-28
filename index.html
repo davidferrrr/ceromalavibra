@@ -7,20 +7,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Fascinate&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Permanent+Marker&display=swap" rel="stylesheet">
-  <!-- Esta línea vincula tu archivo estilos.css -->
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body style="text-align: center;">
-<!-- BARRA DE NAVEGACIÓN SUPERIOR -->
   <nav class="barra-navegacion">
-  <a href="index.html">Inicio</a>
-  <a href="sobre-nosotros.html">Sobre nosotros</a>
+    <a href="index.html">Inicio</a>
+    <a href="sobre-nosotros.html">Sobre nosotros</a>
     <a href="#interes">Le podría interesar</a>
   </nav>
+
   <div class="contenedor-titulo-fondo">
     <h1 class="titulo-principal">Ciudad Bolívar</h1>
   </div>
-  <!-- Menú desplegable sobre la segunda imagen -->
+
   <section class="contenedor-menu-fondo" aria-label="Menú principal">
     <div class="menu-contenedor">
       <label for="menu-toggle" class="menu-boton">Menú ▾</label>
@@ -34,21 +33,17 @@
     </div>
   </section>
 
-<!-- SECCIÓN DE CONTENIDO PRINCIPAL (BASADA EN TU BOCETO) -->
   <section class="seccion-principal">
-
-    <!-- Columna Izquierda: Descripción del Proyecto -->
     <div class="caja-descripcion">
       <h2>En la ciudad</h2>
-      <p>Este sitio nace desde la necesidad de brindar un espacio a la localidad 19 de Bogotá, esa que está rozando con el Sumapáz, con Usme, Bosa, Tunjuelito y Soacha. Esta localidad dio a luz hace cuarenta años mediante el acto administrativo 14 del Concejo de Bogotá que tuvo lugar el 7 de septiembre de 1983. Sus límites, ajustados en 1992</p>
+      <p>Este sitio nace desde la necesidad de brindar un espacio a la localidad 19 de Bogotá, esa que está rozando con el Sumapáz, con Usme, Bosa, Tunjuelito y Soacha. Esta localidad dio a luz una cultura local bastante viva y diversa, con memoria, tierra, arte y esfuerzo. Aquí buscamos recopilar historias, imágenes, recuerdos y voces que acompañan la vida cotidiana del barrio y del territorio.</p>
     </div>
 
     <section class="seccion-audios" aria-labelledby="titulo-audios">
-      <h2 id="titulo-audios">Escucha algunos testimonios: </h2>
+      <h2 id="titulo-audios">Escucha algunos testimonios:</h2>
 
       <details class="recuadro-audio">
-        <summary>Los orígenes del barrio México
-</summary>
+        <summary>Los orígenes del barrio México</summary>
         <audio controls preload="none">
           <source src="https://repositorio.biblored.gov.co/server/api/core/bitstreams/67ed8cb4-2a8a-4b72-9c87-4a1904dae9f2/content " type="audio/mpeg">
           Tu navegador no puede reproducir este audio.
@@ -56,8 +51,7 @@
       </details>
 
       <details class="recuadro-audio">
-        <summary>Los orígenes del barrio Potosí-La Isla
-</summary>
+        <summary>Los orígenes del barrio Potosí-La Isla</summary>
         <audio controls preload="none">
           <source src="https://repositorio.biblored.gov.co/server/api/core/bitstreams/3f41cb49-7142-4881-a0e2-506345aff8fa/content" type="audio/mpeg">
           Tu navegador no puede reproducir este audio.
@@ -65,8 +59,7 @@
       </details>
 
       <details class="recuadro-audio">
-        <summary>El Edén un barrio joven de Ciudad Bolívar
-</summary>
+        <summary>El Edén un barrio joven de Ciudad Bolívar</summary>
         <audio controls preload="none">
           <source src="https://repositorio.biblored.gov.co/server/api/core/bitstreams/578eb40d-8a7b-438d-8e2a-7a1bae0db3dc/content" type="audio/mpeg">
           Tu navegador no puede reproducir este audio.
@@ -79,5 +72,16 @@
     </section>
   </section>
 
+  <script>
+    const menuCheckbox = document.getElementById('menu-toggle');
+    const contenedorMenuFondo = document.querySelector('.contenedor-menu-fondo');
+
+    const actualizarFondoMenu = () => {
+      contenedorMenuFondo.classList.toggle('menu-abierto', menuCheckbox.checked);
+    };
+
+    menuCheckbox.addEventListener('change', actualizarFondoMenu);
+    actualizarFondoMenu();
+  </script>
 </body>
 </html>
