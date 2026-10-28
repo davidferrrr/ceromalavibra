@@ -115,11 +115,14 @@ div {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transform: translateY(-8px);
+  transform: translateY(-10px) scaleY(0.96);
+  transform-origin: top center;
+  filter: blur(3px);
   transition:
-    max-height 0.35s ease,
-    opacity 0.25s ease,
-    transform 0.25s ease;
+    max-height 0.38s ease,
+    opacity 0.28s ease,
+    transform 0.3s ease,
+    filter 0.28s ease;
   pointer-events: none;
   margin-top: 15px;
   gap: 8px;
@@ -130,7 +133,8 @@ div {
 .menu-checkbox:checked ~ .opciones-menu {
   max-height: 220px;
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scaleY(1);
+  filter: blur(0);
   pointer-events: auto;
 }
 
@@ -138,7 +142,14 @@ div {
   margin: 0;
   padding: 6px 10px;
   border-radius: 8px;
-  transition: background 0.2s ease;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.25s ease, background 0.2s ease;
+}
+
+.menu-checkbox:checked ~ .opciones-menu .subparrafo {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .opciones-menu .subparrafo:hover {
