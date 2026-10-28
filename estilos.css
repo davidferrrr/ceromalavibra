@@ -253,15 +253,16 @@ img {
   min-height: 220px;
   display: grid;
   place-items: center;
-  padding: 40px 20px;
+  padding: 40px 20px 30px;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.52)),
-    url("imagenes/IMG_20260621_180504_914@-2090904604.jpg");
+    linear-gradient(rgba(6, 17, 10, 0.5), rgba(6, 17, 10, 0.75)),
+    url("imagenes/Versión footer.jpg");
   background-size: cover;
-  background-position: center 45%;
+  background-position: center center;
   background-repeat: no-repeat;
   overflow: hidden;
   margin-top: 40px;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.18);
 }
 
 .pie-contenido {
