@@ -208,6 +208,7 @@ img {
   background-position: center 65%;
   box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.2);
   transition: background-position 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+  animation: none;
 }
 
 .contenedor-menu-fondo.menu-abierto {
@@ -709,7 +710,8 @@ img {
   .pasando-anterior,
   .contenedor-titulo-fondo,
   .titulo-principal,
-  .menu-boton {
+  .menu-boton,
+  .contenedor-menu-fondo.menu-abierto {
     animation: none;
   }
 }
