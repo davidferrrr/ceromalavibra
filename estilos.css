@@ -112,14 +112,37 @@ div {
 }
 
 .opciones-menu {
-  display: none;
-  flex-direction: column;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-8px);
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  pointer-events: none;
   margin-top: 15px;
   gap: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .menu-checkbox:checked ~ .opciones-menu {
-  display: flex;
+  max-height: 220px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.opciones-menu .subparrafo {
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.opciones-menu .subparrafo:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .subparrafo a {
