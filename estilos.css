@@ -258,7 +258,7 @@ img {
     linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.52)),
     url("imagenes/IMG_20260621_180504_914@-2090904604.jpg");
   background-size: cover;
-  background-position: center 60%;
+  background-position: center 45%;
   background-repeat: no-repeat;
   overflow: hidden;
   margin-top: 40px;
@@ -284,7 +284,7 @@ img {
 .pie-subtitulo {
   margin: 10px 0 0;
   color: #f1f1f1;
-  font-size: 1.1em;
+  font-size: 1.15em;
   font-family: "Old Standard TT", serif;
   text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
 }
@@ -292,7 +292,7 @@ img {
 .pie-detalle {
   margin: 6px 0 0;
   color: #e7efe7;
-  font-size: 0.95em;
+  font-size: 0.92em;
   font-family: "Old Standard TT", serif;
   letter-spacing: 0.04em;
   text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
