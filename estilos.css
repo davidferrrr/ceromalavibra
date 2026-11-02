@@ -279,3 +279,31 @@ body {
     padding: 12px;
   }
 }
+
+/* Aumentar el área del PDF para que el texto pueda leerse cómodamente. */
+@media (min-width: 901px) {
+  .pagina-repositorio-escritos {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    max-width: 1600px;
+    column-gap: 24px;
+  }
+
+  .pagina-repositorio-escritos > .lector-libro {
+    height: min(78vh, 760px);
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 900px) {
+  .pagina-repositorio-escritos > .lector-libro {
+    height: min(72vh, 680px);
+    min-height: 480px;
+  }
+}
+
+@media (max-width: 560px) {
+  .pagina-repositorio-escritos > .lector-libro {
+    height: min(68vh, 600px);
+    min-height: 440px;
+  }
+}
