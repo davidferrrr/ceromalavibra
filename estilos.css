@@ -856,3 +856,90 @@ img {
     padding: 9px 12px;
   }
 }
+
+/* Paleta azul petróleo + arena */
+:root {
+  --color-petroleo: #244B55;
+  --color-petroleo-oscuro: #14282b;
+  --color-arena: #D8C3A5;
+  --color-arena-claro: #F4EFE8;
+}
+
+body {
+  background-color: var(--color-petroleo-oscuro);
+}
+
+.barra-navegacion,
+.barra-superior {
+  background-color: var(--color-petroleo);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.barra-navegacion a:hover,
+.caja-descripcion h2,
+.seccion-audios h2,
+.enlace-exposicion,
+.pagina-sobre-nosotros > h1,
+.pagina-espacios-recreativos > h1,
+.texto-espacio h2,
+.pagina-repositorio-escritos > h1,
+.escrito-destacado h2,
+.selector-escrito h2,
+.caja-texto-sobre h2 {
+  color: var(--color-arena);
+}
+
+.menu-boton,
+.menu-boton:hover {
+  background: linear-gradient(180deg, #426b73 0%, var(--color-petroleo) 100%);
+}
+
+.menu-boton:hover {
+  box-shadow: 0 5px 14px rgba(36, 75, 85, 0.4);
+}
+
+.subparrafo a:hover {
+  color: var(--color-arena);
+}
+
+.contenedor-titulo-fondo {
+  background-color: var(--color-petroleo-oscuro);
+  background-image: url("imagenes/IMG_20250607_165832_235@-1854612948.jpg");
+}
+
+.contenedor-titulo-fondo::before {
+  display: none;
+}
+
+.recuadro-audio,
+.imagen-espacio-vacia,
+.escrito-destacado,
+.selector-escrito,
+.entrada-url-escrito input,
+.boton-abrir-escrito,
+.controles-libro button {
+  border-color: rgba(216, 195, 165, 0.55);
+}
+
+.imagen-espacio-vacia {
+  border-bottom-color: rgba(216, 195, 165, 0.55);
+}
+
+.licencia-escrito a,
+.entrada-url-escrito button,
+.selector-escrito input[type="file"]::file-selector-button {
+  color: var(--color-arena);
+}
+
+.boton-abrir-escrito,
+.controles-libro button,
+.entrada-url-escrito button,
+.selector-escrito input[type="file"]::file-selector-button {
+  background-color: var(--color-petroleo);
+  color: var(--color-arena-claro);
+}
+
+.boton-abrir-escrito:hover:not(:disabled),
+.controles-libro button:hover:not(:disabled) {
+  background-color: #315d67;
+}
