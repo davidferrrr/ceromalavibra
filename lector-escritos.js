@@ -40,8 +40,6 @@ function updateControls() {
 function scrollToSelectedWriting(button) {
   const selectedWriting = button.closest(".escrito-destacado");
   const isNarrowLayout = window.matchMedia("(max-width: 900px)").matches;
-  // En escritorio se alinea la ficha seleccionada con el lector fijo en la columna contigua.
-  // En pantallas estrechas, el lector está debajo de la lista y se lleva a la vista directamente.
   const target = isNarrowLayout ? reader : selectedWriting;
   if (!target) {
     return;
@@ -85,15 +83,20 @@ async function renderPage(direction = "next") {
 
     const baseViewport = page.getViewport({ scale: 1 });
     const availableWidth = Math.max(240, pageFrame.clientWidth - 32);
-    const availableHeight = Math.max(280, pageFrame.clientHeight - 32);
-    const scale = Math.min(availableWidth / baseViewport.width, availableHeight / baseViewport.height);
+    // Ajusta la página al ancho actual, pero no la reduce para que quepa en la altura.
+    // Así el texto queda más grande y se puede recorrer verticalmente dentro del marco;
+    // los controles de página permanecen fuera de esa zona desplazable.
+    const scale = availableWidth / baseViewport.width;
     const viewport = page.getViewport({ scale });
     const pixelRatio = Math.min(3, Math.max(2, window.devicePixelRatio || 1));
 
+    pageFrame.style.overflowY = "auto";
+    pageFrame.style.alignItems = "flex-start";
     canvas.width = Math.floor(viewport.width * pixelRatio);
     canvas.height = Math.floor(viewport.height * pixelRatio);
     canvas.style.width = `${Math.floor(viewport.width)}px`;
     canvas.style.height = `${Math.floor(viewport.height)}px`;
+    canvas.style.maxWidth = "100%";
     emptyMessage.hidden = true;
     canvas.hidden = false;
 
@@ -164,7 +167,6 @@ async function openPdf(file) {
 async function loadFeaturedPdf(button, path, name) {
   button.disabled = true;
   markSelectedWriting(button);
-  // Mover la vista al escrito desde el primer momento, incluso mientras el PDF carga.
   scrollToSelectedWriting(button);
 
   try {
