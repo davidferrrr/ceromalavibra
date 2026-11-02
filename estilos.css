@@ -164,22 +164,28 @@ body {
   width: 100%;
   max-width: none;
   min-width: 0;
-  height: 100%;
-  min-height: 620px;
+  height: min(72vh, 560px);
+  min-height: 420px;
   margin: 0;
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 90px;
+  align-self: start;
 }
 
 .lector-libro .libro-marco {
   flex: 1 1 auto;
-  min-height: 560px;
-  height: auto;
+  min-height: 340px;
+  height: 100%;
   padding: 18px;
 }
 
 .lector-libro .pagina-libro {
   min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pagina-repositorio-escritos > .selector-escrito {
@@ -235,6 +241,8 @@ body {
 
   .pagina-repositorio-escritos > .lector-libro {
     min-height: 0;
+    height: min(68vh, 560px);
+    position: static;
   }
 
   .lector-libro .libro-marco {

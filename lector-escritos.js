@@ -9,6 +9,7 @@ const asentamientosButton = document.getElementById("abrir-escrito-asentamientos
 const canvas = document.getElementById("pagina-pdf");
 const pageFrame = document.getElementById("pagina-libro");
 const emptyMessage = document.getElementById("indicacion-libro");
+const reader = document.querySelector(".lector-libro");
 const status = document.getElementById("estado-lector");
 const pageCount = document.getElementById("contador-paginas");
 const previousButton = document.getElementById("pagina-anterior");
@@ -34,6 +35,25 @@ function updateControls() {
   pageCount.textContent = pdfDocument
     ? `Página ${currentPage} de ${pdfDocument.numPages}`
     : "Página 0 de 0";
+}
+
+function scrollToSelectedWriting(button) {
+  const selectedWriting = button.closest(".escrito-destacado");
+  const isNarrowLayout = window.matchMedia("(max-width: 900px)").matches;
+  // En escritorio el lector queda en la columna derecha, a la altura de la ficha.
+  // En móvil está debajo de la lista, así que llevamos la vista directamente al lector.
+  const target = isNarrowLayout ? reader : selectedWriting;
+  if (!target) {
+    return;
+  }
+
+  const topOffset = isNarrowLayout ? 16 : 90;
+  const top = target.getBoundingClientRect().top + window.scrollY - topOffset;
+  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth";
+
+  window.scrollTo({ top: Math.max(0, top), behavior });
 }
 
 async function renderPage(direction = "next") {
@@ -149,6 +169,9 @@ async function loadFeaturedPdf(button, path, name) {
       name,
       arrayBuffer: async () => data
     });
+    if (pdfDocument) {
+      scrollToSelectedWriting(button);
+    }
   } catch (error) {
     console.error("No se pudo cargar el escrito:", error);
     setStatus("No se pudo cargar el escrito. Revisa que el sitio esté abierto con Go Live.", true);
