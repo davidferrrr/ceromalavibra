@@ -121,6 +121,8 @@ body {
   padding: clamp(18px, 2vw, 26px);
   align-items: flex-start;
   gap: 18px;
+  scroll-margin-top: 96px;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .pagina-repositorio-escritos > article.escrito-destacado:nth-of-type(1) { grid-row: 3; }
@@ -128,6 +130,11 @@ body {
 .pagina-repositorio-escritos > article.escrito-destacado:nth-of-type(3) { grid-row: 5; }
 .pagina-repositorio-escritos > article.escrito-destacado:nth-of-type(4) { grid-row: 6; }
 .pagina-repositorio-escritos > article.escrito-destacado:nth-of-type(5) { grid-row: 7; }
+
+.pagina-repositorio-escritos > article.escrito-seleccionado {
+  border-color: var(--color-arena);
+  box-shadow: 0 0 0 2px rgba(216, 195, 165, 0.2);
+}
 
 .escrito-destacado > div {
   flex: 1 1 auto;
@@ -164,20 +171,21 @@ body {
   width: 100%;
   max-width: none;
   min-width: 0;
-  height: min(72vh, 560px);
-  min-height: 420px;
+  height: min(62vh, 500px);
+  min-height: 360px;
   margin: 0;
   display: flex;
   flex-direction: column;
   position: sticky;
   top: 90px;
   align-self: start;
+  scroll-margin-top: 96px;
 }
 
 .lector-libro .libro-marco {
   flex: 1 1 auto;
-  min-height: 340px;
-  height: 100%;
+  min-height: 0;
+  height: auto;
   padding: 18px;
 }
 
@@ -240,14 +248,14 @@ body {
   }
 
   .pagina-repositorio-escritos > .lector-libro {
-    min-height: 0;
-    height: min(68vh, 560px);
+    min-height: 340px;
+    height: min(58vh, 480px);
     position: static;
   }
 
   .lector-libro .libro-marco {
-    min-height: 480px;
-    height: 68vh;
+    min-height: 0;
+    height: 100%;
   }
 }
 
@@ -260,9 +268,14 @@ body {
     align-self: stretch;
   }
 
+  .pagina-repositorio-escritos > .lector-libro {
+    min-height: 320px;
+    height: min(55vh, 420px);
+  }
+
   .lector-libro .libro-marco {
-    min-height: 420px;
-    height: 62vh;
+    min-height: 0;
+    height: 100%;
     padding: 12px;
   }
 }

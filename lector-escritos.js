@@ -40,20 +40,24 @@ function updateControls() {
 function scrollToSelectedWriting(button) {
   const selectedWriting = button.closest(".escrito-destacado");
   const isNarrowLayout = window.matchMedia("(max-width: 900px)").matches;
-  // En escritorio el lector queda en la columna derecha, a la altura de la ficha.
-  // En móvil está debajo de la lista, así que llevamos la vista directamente al lector.
+  // En escritorio se alinea la ficha seleccionada con el lector fijo en la columna contigua.
+  // En pantallas estrechas, el lector está debajo de la lista y se lleva a la vista directamente.
   const target = isNarrowLayout ? reader : selectedWriting;
   if (!target) {
     return;
   }
 
-  const topOffset = isNarrowLayout ? 16 : 90;
-  const top = target.getBoundingClientRect().top + window.scrollY - topOffset;
   const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ? "auto"
     : "smooth";
+  target.scrollIntoView({ behavior, block: "start" });
+}
 
-  window.scrollTo({ top: Math.max(0, top), behavior });
+function markSelectedWriting(button) {
+  document.querySelectorAll(".escrito-destacado.escrito-seleccionado").forEach(article => {
+    article.classList.remove("escrito-seleccionado");
+  });
+  button.closest(".escrito-destacado")?.classList.add("escrito-seleccionado");
 }
 
 async function renderPage(direction = "next") {
@@ -159,6 +163,10 @@ async function openPdf(file) {
 
 async function loadFeaturedPdf(button, path, name) {
   button.disabled = true;
+  markSelectedWriting(button);
+  // Mover la vista al escrito desde el primer momento, incluso mientras el PDF carga.
+  scrollToSelectedWriting(button);
+
   try {
     const response = await fetch(path);
     if (!response.ok) {
@@ -169,9 +177,6 @@ async function loadFeaturedPdf(button, path, name) {
       name,
       arrayBuffer: async () => data
     });
-    if (pdfDocument) {
-      scrollToSelectedWriting(button);
-    }
   } catch (error) {
     console.error("No se pudo cargar el escrito:", error);
     setStatus("No se pudo cargar el escrito. Revisa que el sitio esté abierto con Go Live.", true);
