@@ -275,8 +275,8 @@ body {
   }
 
   .pagina-repositorio-escritos > .lector-libro {
-    min-height: 380px;
-    height: min(58vh, 460px);
+    min-height: 780px;
+    height: min(80vh, 460px);
   }
 
   .lector-libro .libro-marco {
