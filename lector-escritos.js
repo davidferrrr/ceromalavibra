@@ -83,19 +83,22 @@ async function renderPage(direction = "next") {
 
     const baseViewport = page.getViewport({ scale: 1 });
     const availableWidth = Math.max(240, pageFrame.clientWidth - 32);
-    // Ajusta la página al ancho actual, pero no la reduce para que quepa en la altura.
-    // Así el texto queda más grande y se puede recorrer verticalmente dentro del marco;
-    // los controles de página permanecen fuera de esa zona desplazable.
-    const scale = availableWidth / baseViewport.width;
+    const availableHeight = Math.max(280, pageFrame.clientHeight - 32);
+    // Escala uniforme: conserva la proporción original del PDF y lo ajusta al marco.
+    const scale = Math.min(
+      availableWidth / baseViewport.width,
+      availableHeight / baseViewport.height
+    );
     const viewport = page.getViewport({ scale });
     const pixelRatio = Math.min(3, Math.max(2, window.devicePixelRatio || 1));
 
-    pageFrame.style.overflowY = "auto";
-    pageFrame.style.alignItems = "flex-start";
+    // Limpiar estilos de versiones anteriores que estiraban el canvas y deformaban la página.
+    pageFrame.style.removeProperty("overflow-y");
+    pageFrame.style.removeProperty("align-items");
     canvas.width = Math.floor(viewport.width * pixelRatio);
     canvas.height = Math.floor(viewport.height * pixelRatio);
     canvas.style.width = `${Math.floor(viewport.width)}px`;
-    canvas.style.height = `${Math.floor(viewport.height)}px`;
+    canvas.style.height = "auto";
     canvas.style.maxWidth = "100%";
     emptyMessage.hidden = true;
     canvas.hidden = false;
