@@ -238,8 +238,8 @@ body {
   }
 
   .lector-libro .libro-marco {
-    min-height: 520px;
-    height: 72vh;
+    min-height: 580px;
+    height: 74vh;
   }
 }
 
@@ -253,8 +253,8 @@ body {
   }
 
   .lector-libro .libro-marco {
-    min-height: 460px;
-    height: 66vh;
+    min-height: 520px;
+    height: 70vh;
     padding: 12px;
   }
 }
