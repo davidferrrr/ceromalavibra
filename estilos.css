@@ -165,7 +165,7 @@ body {
   max-width: none;
   min-width: 0;
   height: 100%;
-  min-height: 620px;
+  min-height: 660px;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -173,7 +173,7 @@ body {
 
 .lector-libro .libro-marco {
   flex: 1 1 auto;
-  min-height: 560px;
+  min-height: 600px;
   height: auto;
   padding: 18px;
 }
@@ -238,8 +238,8 @@ body {
   }
 
   .lector-libro .libro-marco {
-    min-height: 480px;
-    height: 68vh;
+    min-height: 520px;
+    height: 72vh;
   }
 }
 
@@ -253,35 +253,8 @@ body {
   }
 
   .lector-libro .libro-marco {
-    min-height: 420px;
-    height: 62vh;
+    min-height: 460px;
+    height: 66vh;
     padding: 12px;
-  }
-}
-
-/* Aumentar un poco solo la altura del marco que contiene la página PDF. */
-.pagina-repositorio-escritos > .lector-libro {
-  min-height: 680px;
-}
-
-.lector-libro .libro-marco {
-  min-height: 620px;
-}
-
-@media (max-width: 900px) {
-  .pagina-repositorio-escritos > .lector-libro {
-    min-height: 0;
-  }
-
-  .lector-libro .libro-marco {
-    min-height: 540px;
-    height: 74vh;
-  }
-}
-
-@media (max-width: 560px) {
-  .lector-libro .libro-marco {
-    min-height: 480px;
-    height: 68vh;
   }
 }
