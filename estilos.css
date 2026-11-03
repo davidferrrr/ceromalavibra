@@ -121,8 +121,6 @@ body {
   padding: clamp(18px, 2vw, 26px);
   align-items: flex-start;
   gap: 18px;
-  scroll-margin-top: 96px;
-  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .pagina-repositorio-escritos > article.escrito-destacado:nth-of-type(1) { grid-row: 3; }
@@ -130,11 +128,6 @@ body {
 .pagina-repositorio-escritos > article.escrito-destacado:nth-of-type(3) { grid-row: 5; }
 .pagina-repositorio-escritos > article.escrito-destacado:nth-of-type(4) { grid-row: 6; }
 .pagina-repositorio-escritos > article.escrito-destacado:nth-of-type(5) { grid-row: 7; }
-
-.pagina-repositorio-escritos > article.escrito-seleccionado {
-  border-color: var(--color-arena);
-  box-shadow: 0 0 0 2px rgba(216, 195, 165, 0.2);
-}
 
 .escrito-destacado > div {
   flex: 1 1 auto;
@@ -171,35 +164,22 @@ body {
   width: 100%;
   max-width: none;
   min-width: 0;
-  height: min(68vh, 590px);
-  min-height: 440px;
+  height: 100%;
+  min-height: 620px;
   margin: 0;
   display: flex;
   flex-direction: column;
-  position: sticky;
-  top: 90px;
-  align-self: start;
-  scroll-margin-top: 96px;
 }
 
 .lector-libro .libro-marco {
   flex: 1 1 auto;
-  min-height: 0;
+  min-height: 560px;
   height: auto;
   padding: 18px;
 }
 
 .lector-libro .pagina-libro {
   min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#pagina-pdf {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
 }
 
 .pagina-repositorio-escritos > .selector-escrito {
@@ -254,14 +234,12 @@ body {
   }
 
   .pagina-repositorio-escritos > .lector-libro {
-    min-height: 400px;
-    height: min(60vh, 500px);
-    position: static;
+    min-height: 0;
   }
 
   .lector-libro .libro-marco {
-    min-height: 0;
-    height: 100%;
+    min-height: 480px;
+    height: 68vh;
   }
 }
 
@@ -274,14 +252,9 @@ body {
     align-self: stretch;
   }
 
-  .pagina-repositorio-escritos > .lector-libro {
-    min-height: 780px;
-    height: min(80vh, 460px);
-  }
-
   .lector-libro .libro-marco {
-    min-height: 0;
-    height: 100%;
+    min-height: 420px;
+    height: 62vh;
     padding: 12px;
   }
 }

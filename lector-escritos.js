@@ -9,7 +9,6 @@ const asentamientosButton = document.getElementById("abrir-escrito-asentamientos
 const canvas = document.getElementById("pagina-pdf");
 const pageFrame = document.getElementById("pagina-libro");
 const emptyMessage = document.getElementById("indicacion-libro");
-const reader = document.querySelector(".lector-libro");
 const status = document.getElementById("estado-lector");
 const pageCount = document.getElementById("contador-paginas");
 const previousButton = document.getElementById("pagina-anterior");
@@ -35,27 +34,6 @@ function updateControls() {
   pageCount.textContent = pdfDocument
     ? `Página ${currentPage} de ${pdfDocument.numPages}`
     : "Página 0 de 0";
-}
-
-function scrollToSelectedWriting(button) {
-  const selectedWriting = button.closest(".escrito-destacado");
-  const isNarrowLayout = window.matchMedia("(max-width: 900px)").matches;
-  const target = isNarrowLayout ? reader : selectedWriting;
-  if (!target) {
-    return;
-  }
-
-  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ? "auto"
-    : "smooth";
-  target.scrollIntoView({ behavior, block: "start" });
-}
-
-function markSelectedWriting(button) {
-  document.querySelectorAll(".escrito-destacado.escrito-seleccionado").forEach(article => {
-    article.classList.remove("escrito-seleccionado");
-  });
-  button.closest(".escrito-destacado")?.classList.add("escrito-seleccionado");
 }
 
 async function renderPage(direction = "next") {
@@ -84,22 +62,14 @@ async function renderPage(direction = "next") {
     const baseViewport = page.getViewport({ scale: 1 });
     const availableWidth = Math.max(240, pageFrame.clientWidth - 32);
     const availableHeight = Math.max(280, pageFrame.clientHeight - 32);
-    // Escala uniforme: conserva la proporción original del PDF y lo ajusta al marco.
-    const scale = Math.min(
-      availableWidth / baseViewport.width,
-      availableHeight / baseViewport.height
-    );
+    const scale = Math.min(availableWidth / baseViewport.width, availableHeight / baseViewport.height);
     const viewport = page.getViewport({ scale });
     const pixelRatio = Math.min(3, Math.max(2, window.devicePixelRatio || 1));
 
-    // Limpiar estilos de versiones anteriores que estiraban el canvas y deformaban la página.
-    pageFrame.style.removeProperty("overflow-y");
-    pageFrame.style.removeProperty("align-items");
     canvas.width = Math.floor(viewport.width * pixelRatio);
     canvas.height = Math.floor(viewport.height * pixelRatio);
     canvas.style.width = `${Math.floor(viewport.width)}px`;
-    canvas.style.height = "auto";
-    canvas.style.maxWidth = "100%";
+    canvas.style.height = `${Math.floor(viewport.height)}px`;
     emptyMessage.hidden = true;
     canvas.hidden = false;
 
@@ -169,9 +139,6 @@ async function openPdf(file) {
 
 async function loadFeaturedPdf(button, path, name) {
   button.disabled = true;
-  markSelectedWriting(button);
-  scrollToSelectedWriting(button);
-
   try {
     const response = await fetch(path);
     if (!response.ok) {
