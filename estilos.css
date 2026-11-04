@@ -359,3 +359,8 @@ body {
     padding: 0 12px;
   }
 }
+.nombre-de-la-clase-de-tu-visor {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+}
