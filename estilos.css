@@ -164,22 +164,38 @@ body {
   width: 100%;
   max-width: none;
   min-width: 0;
-  height: 100%;
-  min-height: 660px;
+  height: auto;
+  min-height: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
 }
 
+/* El marco se ajusta al tamaño y proporción de la página PDF renderizada. */
 .lector-libro .libro-marco {
-  flex: 1 1 auto;
-  min-height: 600px;
+  flex: 0 0 auto;
+  min-height: 0;
   height: auto;
   padding: 18px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .lector-libro .pagina-libro {
+  box-sizing: border-box;
+  flex: 0 0 auto;
   min-height: 0;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+.lector-libro #pagina-pdf {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .pagina-repositorio-escritos > .selector-escrito {
@@ -233,13 +249,9 @@ body {
     height: auto;
   }
 
-  .pagina-repositorio-escritos > .lector-libro {
-    min-height: 0;
-  }
-
   .lector-libro .libro-marco {
-    min-height: 580px;
-    height: 74vh;
+    min-height: 0;
+    height: auto;
   }
 }
 
@@ -253,8 +265,8 @@ body {
   }
 
   .lector-libro .libro-marco {
-    min-height: 520px;
-    height: 70vh;
+    min-height: 0;
+    height: auto;
     padding: 12px;
   }
 }
