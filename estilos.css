@@ -228,6 +228,31 @@ body {
   line-height: 1.55;
 }
 
+/* Ajustes de legibilidad para la introducción principal */
+.seccion-principal {
+  gap: 28px;
+}
+
+.caja-descripcion {
+  max-width: 780px;
+  margin: 0 auto 28px;
+  padding: 0 18px;
+  text-align: left;
+}
+
+.caja-descripcion h2 {
+  margin: 0 0 14px;
+  font-size: clamp(2rem, 3vw, 2.9rem);
+  line-height: 1.2;
+}
+
+.caja-descripcion p {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
 @media (max-width: 900px) {
   .pagina-repositorio-escritos {
     display: flex;
@@ -268,5 +293,9 @@ body {
     min-height: 0;
     height: auto;
     padding: 12px;
+  }
+
+  .caja-descripcion {
+    padding: 0 12px;
   }
 }
