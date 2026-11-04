@@ -1,6 +1,6 @@
 @import url("https://raw.githubusercontent.com/davidferrrr/ceromalavibra/a2b362a7e2084336838aca81994bef8ad94e96a9/estilos.css");
 
-/* Inicio: hacer que las imágenes de portada llenen sus contenedores sin dejar franjas. */
+/* Mantener las imágenes de las secciones de inicio a todo el ancho, sin zoom que desplace los bordes. */
 .contenedor-titulo-fondo,
 .contenedor-menu-fondo,
 .pie-pagina {
@@ -10,7 +10,6 @@
   background-position: center center;
 }
 
-/* Evitar que el zoom animado desborde el contenedor y genere espacio lateral. */
 .contenedor-titulo-fondo,
 .contenedor-menu-fondo.menu-abierto {
   animation: none;
