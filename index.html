@@ -14,13 +14,22 @@
       color: #D8C3A5;
     }
 
+    .carrusel-controles {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .carrusel-videos {
       display: flex;
+      flex: 1;
       gap: 18px;
-      margin: 0 -4px 16px;
+      min-width: 0;
+      margin: 0;
       padding: 4px 4px 14px;
       overflow-x: auto;
       overscroll-behavior-x: contain;
+      scroll-behavior: smooth;
       scroll-snap-type: x mandatory;
       scroll-padding-inline: 4px;
       -webkit-overflow-scrolling: touch;
@@ -73,15 +82,69 @@
       text-decoration: none;
     }
 
+    .flecha-carrusel {
+      display: inline-grid;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid rgba(216, 195, 165, 0.7);
+      border-radius: 50%;
+      background: #244B55;
+      color: #D8C3A5;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .flecha-carrusel:hover,
+    .flecha-carrusel:focus-visible {
+      background: #315d67;
+      transform: scale(1.06);
+    }
+
+    .flecha-carrusel:focus-visible,
+    .boton-video:focus-visible {
+      outline: 3px solid #F4EFE8;
+      outline-offset: 3px;
+    }
+
     .indicacion-carrusel {
-      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 14px 0 0;
       color: #F4EFE8;
       font-size: 0.95rem;
     }
 
-    @media (max-width: 420px) {
+    .indicacion-carrusel span {
+      color: #D8C3A5;
+      font-size: 1.2em;
+    }
+
+    @media (max-width: 560px) {
+      .carrusel-controles {
+        gap: 8px;
+      }
+
+      .flecha-carrusel {
+        flex-basis: 34px;
+        width: 34px;
+        height: 34px;
+        font-size: 1.2rem;
+      }
+
       .tarjeta-video {
-        flex-basis: 88%;
+        flex-basis: min(100%, 285px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .carrusel-videos {
+        scroll-behavior: auto;
       }
     }
   </style>
@@ -150,34 +213,38 @@
 
     <section class="recuadro-video" aria-labelledby="titulo-video">
       <h2 id="titulo-video">Acciones que le pueden interesar</h2>
-      <div class="carrusel-videos" aria-label="Videos; desliza horizontalmente para ver el siguiente">
-        <article class="tarjeta-video">
-          <div class="video-tiktok">
-            <iframe
-              src="https://www.tiktok.com/embed/v2/7703990959985708306?lang=es-ES"
-              title="Video de acciones que le pueden interesar, de Comunired 4"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
-          <a class="boton-video" href="https://www.tiktok.com/@comunired4/video/7703990959985708306?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7672208709698848276" target="_blank" rel="noopener noreferrer">Ir al video</a>
-        </article>
+      <div class="carrusel-controles">
+        <button class="flecha-carrusel" type="button" aria-label="Ver video anterior" aria-controls="carrusel-videos">&lsaquo;</button>
+        <div class="carrusel-videos" id="carrusel-videos" aria-label="Videos; desliza horizontalmente para ver el siguiente">
+          <article class="tarjeta-video">
+            <div class="video-tiktok">
+              <iframe
+                src="https://www.tiktok.com/embed/v2/7703990959985708306?lang=es-ES"
+                title="Video de acciones que le pueden interesar, de Comunired 4"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <a class="boton-video" href="https://www.tiktok.com/@comunired4/video/7703990959985708306?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7672208709698848276" target="_blank" rel="noopener noreferrer">Ir al video</a>
+          </article>
 
-        <article class="tarjeta-video">
-          <div class="video-tiktok">
-            <iframe
-              src="https://www.tiktok.com/embed/v2/7686266612869057809?lang=es-ES"
-              title="Video de acciones que le pueden interesar, de Jorge Barón Jr."
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
-          <a class="boton-video" href="https://www.tiktok.com/@jorgebaronjr/video/7686266612869057809?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7672208709698848276" target="_blank" rel="noopener noreferrer">Ir al video</a>
-        </article>
+          <article class="tarjeta-video">
+            <div class="video-tiktok">
+              <iframe
+                src="https://www.tiktok.com/embed/v2/7686266612869057809?lang=es-ES"
+                title="Video de acciones que le pueden interesar, de Jorge Barón Jr."
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <a class="boton-video" href="https://www.tiktok.com/@jorgebaronjr/video/7686266612869057809?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7672208709698848276" target="_blank" rel="noopener noreferrer">Ir al video</a>
+          </article>
+        </div>
+        <button class="flecha-carrusel" type="button" aria-label="Ver video siguiente" aria-controls="carrusel-videos">&rsaquo;</button>
       </div>
-      <p class="indicacion-carrusel">Desliza hacia la izquierda para ver más videos <span aria-hidden="true">&larr;</span></p>
+      <p class="indicacion-carrusel"><span aria-hidden="true">&larr;</span> Desliza para descubrir más videos <span aria-hidden="true">&rarr;</span></p>
     </section>
   </section>
 
@@ -199,6 +266,16 @@
 
     menuCheckbox.addEventListener('change', actualizarFondoMenu);
     actualizarFondoMenu();
+
+    const carruselVideos = document.getElementById('carrusel-videos');
+    document.querySelectorAll('.flecha-carrusel').forEach((boton, indice) => {
+      boton.addEventListener('click', () => {
+        const direccion = indice === 0 ? -1 : 1;
+        const tarjeta = carruselVideos.querySelector('.tarjeta-video');
+        const distancia = tarjeta ? tarjeta.getBoundingClientRect().width + 18 : carruselVideos.clientWidth;
+        carruselVideos.scrollBy({ left: direccion * distancia, behavior: 'smooth' });
+      });
+    });
   </script>
 </body>
 </html>
