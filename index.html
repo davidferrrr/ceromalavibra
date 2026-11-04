@@ -9,6 +9,82 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Fascinate&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Permanent+Marker&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilos.css">
+  <style>
+    .recuadro-video h2 {
+      color: #D8C3A5;
+    }
+
+    .carrusel-videos {
+      display: flex;
+      gap: 18px;
+      margin: 0 -4px 16px;
+      padding: 4px 4px 14px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-color: #D8C3A5 rgba(20, 40, 43, 0.65);
+      scrollbar-width: thin;
+      touch-action: pan-x pan-y;
+    }
+
+    .tarjeta-video {
+      box-sizing: border-box;
+      flex: 0 0 min(100%, 325px);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      padding: 12px;
+      border: 1px solid rgba(216, 195, 165, 0.45);
+      border-radius: 10px;
+      background: rgba(20, 40, 43, 0.55);
+    }
+
+    .video-tiktok {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #000;
+    }
+
+    .video-tiktok iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .boton-video,
+    .boton-video:visited,
+    .boton-video:hover,
+    .boton-video:focus-visible {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 10px 18px;
+      border: 1px solid rgba(216, 195, 165, 0.7);
+      border-radius: 6px;
+      background-color: #244B55;
+      color: #D8C3A5;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .indicacion-carrusel {
+      margin: 0;
+      color: #F4EFE8;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 420px) {
+      .tarjeta-video {
+        flex-basis: 88%;
+      }
+    }
+  </style>
 </head>
 <body style="text-align: center;">
   <nav class="barra-navegacion">
@@ -74,15 +150,34 @@
 
     <section class="recuadro-video" aria-labelledby="titulo-video">
       <h2 id="titulo-video">Acciones que le pueden interesar</h2>
-      <div class="video-tiktok">
-        <iframe
-          src="https://www.tiktok.com/embed/v2/7703990959985708306?lang=es-ES"
-          title="Video de acciones que le pueden interesar"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
+      <div class="carrusel-videos" aria-label="Videos; desliza horizontalmente para ver el siguiente">
+        <article class="tarjeta-video">
+          <div class="video-tiktok">
+            <iframe
+              src="https://www.tiktok.com/embed/v2/7703990959985708306?lang=es-ES"
+              title="Video de acciones que le pueden interesar, de Comunired 4"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <a class="boton-video" href="https://www.tiktok.com/@comunired4/video/7703990959985708306?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7672208709698848276" target="_blank" rel="noopener noreferrer">Ir al video</a>
+        </article>
+
+        <article class="tarjeta-video">
+          <div class="video-tiktok">
+            <iframe
+              src="https://www.tiktok.com/embed/v2/7686266612869057809?lang=es-ES"
+              title="Video de acciones que le pueden interesar, de Jorge Barón Jr."
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <a class="boton-video" href="https://www.tiktok.com/@jorgebaronjr/video/7686266612869057809?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7672208709698848276" target="_blank" rel="noopener noreferrer">Ir al video</a>
+        </article>
       </div>
-      <a class="boton-video" href="https://www.tiktok.com/@comunired4/video/7703990959985708306?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7672208709698848276" target="_blank" rel="noopener noreferrer">Ir al video</a>
+      <p class="indicacion-carrusel">Desliza hacia la izquierda para ver más videos <span aria-hidden="true">&larr;</span></p>
     </section>
   </section>
 
