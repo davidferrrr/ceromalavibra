@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para ustedes | Ciudad Bolívar</title>
+  <link rel="icon" type="image/svg+xml" href="imagenes/logo-pestana.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body class="pagina-le-interesa">
+  <nav class="barra-navegacion">
+    <a href="index.html">Inicio</a>
+    <a href="sobre-nosotros.html">Sobre nosotros</a>
+    <a href="le-podria-interesar.html" aria-current="page">Le podría interesar</a>
+    <button class="enlace-notificaciones" id="abrir-notificaciones" type="button" aria-haspopup="dialog" aria-controls="dialogo-notificaciones">Notificaciones</button>
+  </nav>
+
+  <main class="contenido-le-interesa">
+    <p class="estado-actividad" id="estado-actividad" role="status" aria-live="polite" hidden></p>
+
+    <section class="seccion-para-ustedes" aria-labelledby="titulo-para-ustedes">
+      <h2 id="titulo-para-ustedes">Para ustedes</h2>
+      <p>Este espacio es para todas las personas del sector que quiera informar sobre un tema que afecte a la localidad, sea sobre esta o simplemente quiera escribir sobre la urbanidad en esta localidad.</p>
+      <button class="boton-escribir" id="boton-escribir" type="button" aria-haspopup="dialog" aria-controls="dialogo-escritura">Escribir</button>
+    </section>
+
+    <section class="ventanilla-escritos" id="ventanilla-escritos" aria-labelledby="titulo-ventanilla" tabindex="-1" hidden>
+      <h2 id="titulo-ventanilla">Ventanilla de escritos</h2>
+      <div id="publicaciones-escritas" aria-live="polite"></div>
+    </section>
+
+  </main>
+
+  <dialog class="dialogo-notificaciones" id="dialogo-notificaciones" aria-labelledby="titulo-notificaciones">
+    <section>
+      <h2 id="titulo-notificaciones">Notificaciones</h2>
+      <p class="aviso-notificaciones">La actividad y los escritos se guardan solo en este navegador. No se comparten con otros visitantes ni están protegidos por una cuenta.</p>
+      <ol class="lista-notificaciones" id="lista-notificaciones" aria-live="polite"></ol>
+      <button class="boton-cerrar-escritura" id="cerrar-notificaciones" type="button">Cerrar</button>
+    </section>
+  </dialog>
+
+  <dialog class="dialogo-escritura" id="dialogo-escritura" aria-labelledby="titulo-dialogo-escritura">
+    <form id="formulario-escritura">
+      <h2 id="titulo-dialogo-escritura">Comparte tu escrito</h2>
+      <label for="texto-escritura">¿Qué te gustaría compartir?</label>
+      <textarea id="texto-escritura" name="texto" rows="8" maxlength="2000" required></textarea>
+      <p class="ayuda-escritura" id="ayuda-escritura">Tu texto se mostrará en la ventanilla de esta página.</p>
+      <div class="acciones-escritura">
+        <button class="boton-cerrar-escritura" id="cerrar-dialogo-escritura" type="button">Cancelar</button>
+        <button class="boton-escribir" id="guardar-escritura" type="submit">Publicar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    const claveAlmacenamiento = 'ceromalavibra:escritos:local:v1';
+    const dialogoEscritura = document.getElementById('dialogo-escritura');
+    const formularioEscritura = document.getElementById('formulario-escritura');
+    const textoEscritura = document.getElementById('texto-escritura');
+    const ventanillaEscritos = document.getElementById('ventanilla-escritos');
+    const publicacionesEscritas = document.getElementById('publicaciones-escritas');
+    const listaNotificaciones = document.getElementById('lista-notificaciones');
+    const dialogoNotificaciones = document.getElementById('dialogo-notificaciones');
+    const botonAbrirNotificaciones = document.getElementById('abrir-notificaciones');
+    const estadoActividad = document.getElementById('estado-actividad');
+    const tituloDialogoEscritura = document.getElementById('titulo-dialogo-escritura');
+    const ayudaEscritura = document.getElementById('ayuda-escritura');
+    const botonGuardarEscritura = document.getElementById('guardar-escritura');
+    const botonAbrirEscritura = document.getElementById('boton-escribir');
+    const formatoFecha = new Intl.DateTimeFormat('es-CO', {
+      dateStyle: 'long',
+      timeStyle: 'short'
+    });
+    const comportamientoDesplazamiento = () =>
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    let estadoGuardado = { publicaciones: [], notificaciones: [] };
+    let almacenamientoDisponible = true;
+    let idPublicacionEnEdicion = null;
+
+    const mostrarEstado = (mensaje, esError = false) => {
+      estadoActividad.textContent = mensaje;
+      estadoActividad.classList.toggle('es-error', esError);
+      estadoActividad.hidden = false;
+    };
+
+    const fechaLegible = (fecha) => formatoFecha.format(new Date(fecha));
+
+    const validarEstado = (estado) =>
+      estado &&
+      Array.isArray(estado.publicaciones) &&
+      estado.publicaciones.every((publicacion) =>
+        typeof publicacion.id === 'string' &&
+        typeof publicacion.texto === 'string' &&
+        typeof publicacion.fechaPublicacion === 'string' &&
+        Number.isFinite(Date.parse(publicacion.fechaPublicacion))
+      ) &&
+      Array.isArray(estado.notificaciones) &&
+      estado.notificaciones.every((notificacion) =>
+        typeof notificacion.id === 'string' &&
+        ['publicado', 'editado'].includes(notificacion.tipo) &&
+        typeof notificacion.fecha === 'string' &&
+        Number.isFinite(Date.parse(notificacion.fecha)) &&
+        typeof notificacion.resumen === 'string'
+      );
+
+    const deshabilitarEdicion = () => {
+      botonAbrirEscritura.disabled = true;
+      botonGuardarEscritura.disabled = true;
+      publicacionesEscritas.querySelectorAll('.boton-editar-escrito').forEach((boton) => {
+        boton.disabled = true;
+      });
+    };
+
+    const cargarEstado = () => {
+      try {
+        const datos = localStorage.getItem(claveAlmacenamiento);
+        if (datos === null) {
+          return;
+        }
+
+        const estado = JSON.parse(datos);
+        if (!validarEstado(estado)) {
+          throw new TypeError('El formato de los datos guardados no es válido.');
+        }
+        estadoGuardado = estado;
+      } catch (error) {
+        almacenamientoDisponible = false;
+        console.error('No se pudo leer la actividad guardada en este navegador.', error);
+        mostrarEstado('No se pudieron cargar los escritos guardados. La edición está deshabilitada para proteger los datos existentes.', true);
+        deshabilitarEdicion();
+      }
+    };
+
+    const guardarEstado = (nuevoEstado) => {
+      try {
+        localStorage.setItem(claveAlmacenamiento, JSON.stringify(nuevoEstado));
+        estadoGuardado = nuevoEstado;
+        return true;
+      } catch (error) {
+        almacenamientoDisponible = false;
+        console.error('No se pudo guardar la actividad en este navegador.', error);
+        mostrarEstado('No se pudo guardar el cambio en este navegador. La edición quedó deshabilitada.', true);
+        deshabilitarEdicion();
+        return false;
+      }
+    };
+
+    const crearElementoFecha = (fecha, prefijo) => {
+      const elemento = document.createElement('time');
+      elemento.className = 'fecha-escrito';
+      elemento.dateTime = fecha;
+      elemento.textContent = `${prefijo}: ${fechaLegible(fecha)}`;
+      return elemento;
+    };
+
+    const renderizarPublicaciones = () => {
+      publicacionesEscritas.replaceChildren();
+      ventanillaEscritos.hidden = estadoGuardado.publicaciones.length === 0;
+
+      estadoGuardado.publicaciones.forEach((publicacion) => {
+        const articulo = document.createElement('article');
+        articulo.className = 'publicacion-escrita';
+        articulo.dataset.publicacionId = publicacion.id;
+        const contenido = document.createElement('div');
+        contenido.className = 'contenido-publicacion';
+        const parrafo = document.createElement('p');
+        parrafo.textContent = publicacion.texto;
+        const botonEditar = document.createElement('button');
+        botonEditar.className = 'boton-editar-escrito';
+        botonEditar.type = 'button';
+        botonEditar.textContent = 'Editar';
+        botonEditar.setAttribute('aria-label', `Editar escrito publicado ${fechaLegible(publicacion.fechaPublicacion)}`);
+        contenido.append(parrafo, crearElementoFecha(publicacion.fechaPublicacion, 'Publicado'));
+        articulo.append(contenido, botonEditar);
+        publicacionesEscritas.append(articulo);
+      });
+
+      if (!almacenamientoDisponible) {
+        deshabilitarEdicion();
+      }
+    };
+
+    const renderizarNotificaciones = () => {
+      listaNotificaciones.replaceChildren();
+      botonAbrirNotificaciones.textContent = estadoGuardado.notificaciones.length
+        ? `Notificaciones (${estadoGuardado.notificaciones.length})`
+        : 'Notificaciones';
+
+      if (!estadoGuardado.notificaciones.length) {
+        const vacio = document.createElement('li');
+        vacio.textContent = 'Todavía no hay actividad guardada en este navegador.';
+        vacio.className = 'notificacion-vacia';
+        listaNotificaciones.append(vacio);
+        return;
+      }
+
+      estadoGuardado.notificaciones.forEach((notificacion) => {
+        const elemento = document.createElement('li');
+        const titulo = document.createElement('strong');
+        titulo.textContent = notificacion.tipo === 'editado' ? 'Escrito editado' : 'Escrito publicado';
+        const fecha = crearElementoFecha(notificacion.fecha, 'Fecha');
+        const resumen = document.createElement('p');
+        resumen.textContent = notificacion.resumen;
+        elemento.append(titulo, fecha, resumen);
+        listaNotificaciones.append(elemento);
+      });
+    };
+
+    document.getElementById('boton-escribir').addEventListener('click', () => {
+      if (!almacenamientoDisponible) {
+        return;
+      }
+      idPublicacionEnEdicion = null;
+      formularioEscritura.reset();
+      tituloDialogoEscritura.textContent = 'Comparte tu escrito';
+      ayudaEscritura.textContent = 'Tu texto se mostrará en la ventanilla de esta página.';
+      botonGuardarEscritura.textContent = 'Publicar';
+      dialogoEscritura.showModal();
+      textoEscritura.focus();
+    });
+
+    document.getElementById('cerrar-dialogo-escritura').addEventListener('click', () => {
+      idPublicacionEnEdicion = null;
+      formularioEscritura.reset();
+      textoEscritura.setCustomValidity('');
+      dialogoEscritura.close();
+    });
+
+    dialogoEscritura.addEventListener('cancel', () => {
+      idPublicacionEnEdicion = null;
+      formularioEscritura.reset();
+      textoEscritura.setCustomValidity('');
+    });
+
+    publicacionesEscritas.addEventListener('click', (evento) => {
+      const botonEditar = evento.target instanceof Element
+        ? evento.target.closest('.boton-editar-escrito')
+        : null;
+      if (!botonEditar || !almacenamientoDisponible) {
+        return;
+      }
+
+      const articulo = botonEditar.closest('.publicacion-escrita');
+      idPublicacionEnEdicion = articulo.dataset.publicacionId;
+      const publicacion = estadoGuardado.publicaciones.find((item) => item.id === idPublicacionEnEdicion);
+      if (!publicacion) {
+        mostrarEstado('No se encontró el escrito que intentas editar. Recarga la página e inténtalo de nuevo.', true);
+        return;
+      }
+      textoEscritura.value = publicacion.texto;
+      tituloDialogoEscritura.textContent = 'Editar escrito';
+      ayudaEscritura.textContent = 'Los cambios reemplazarán el texto publicado.';
+      botonGuardarEscritura.textContent = 'Guardar cambios';
+      dialogoEscritura.showModal();
+      textoEscritura.focus();
+    });
+
+    textoEscritura.addEventListener('input', () => {
+      textoEscritura.setCustomValidity('');
+    });
+
+    formularioEscritura.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+      const contenido = textoEscritura.value.trim();
+      textoEscritura.setCustomValidity(contenido ? '' : 'Escribe un texto antes de publicar.');
+
+      if (!formularioEscritura.reportValidity()) {
+        return;
+      }
+
+      if (!almacenamientoDisponible) {
+        return;
+      }
+
+      const ahora = new Date().toISOString();
+      const resumen = contenido.length > 180 ? `${contenido.slice(0, 177)}...` : contenido;
+      let nuevoEstado;
+
+      if (idPublicacionEnEdicion) {
+        const existe = estadoGuardado.publicaciones.some((publicacion) => publicacion.id === idPublicacionEnEdicion);
+        if (!existe) {
+          mostrarEstado('No se encontró el escrito que intentas editar. Recarga la página e inténtalo de nuevo.', true);
+          return;
+        }
+        nuevoEstado = {
+          publicaciones: estadoGuardado.publicaciones.map((publicacion) =>
+            publicacion.id === idPublicacionEnEdicion
+              ? { ...publicacion, texto: contenido }
+              : publicacion
+          ),
+          notificaciones: [
+            { id: `${Date.now()}-editado`, tipo: 'editado', fecha: ahora, resumen },
+            ...estadoGuardado.notificaciones
+          ]
+        };
+      } else {
+        const id = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        nuevoEstado = {
+          publicaciones: [
+            { id, texto: contenido, fechaPublicacion: ahora },
+            ...estadoGuardado.publicaciones
+          ],
+          notificaciones: [
+            { id: `${id}-publicado`, tipo: 'publicado', fecha: ahora, resumen },
+            ...estadoGuardado.notificaciones
+          ]
+        };
+      }
+
+      if (!guardarEstado(nuevoEstado)) {
+        return;
+      }
+      idPublicacionEnEdicion = null;
+      renderizarPublicaciones();
+      renderizarNotificaciones();
+      mostrarEstado('El escrito y su notificación quedaron guardados en este navegador.');
+      ventanillaEscritos.hidden = false;
+      formularioEscritura.reset();
+      textoEscritura.setCustomValidity('');
+      dialogoEscritura.close();
+      ventanillaEscritos.scrollIntoView({
+        behavior: comportamientoDesplazamiento(),
+        block: 'center'
+      });
+      ventanillaEscritos.focus({ preventScroll: true });
+    });
+
+    cargarEstado();
+    renderizarPublicaciones();
+    renderizarNotificaciones();
+
+    botonAbrirNotificaciones.addEventListener('click', () => {
+      dialogoNotificaciones.showModal();
+    });
+
+    document.getElementById('cerrar-notificaciones').addEventListener('click', () => {
+      dialogoNotificaciones.close();
+    });
+
+    window.addEventListener('storage', (evento) => {
+      if (evento.key !== claveAlmacenamiento && evento.key !== null) {
+        return;
+      }
+
+      try {
+        const estado = evento.newValue === null
+          ? { publicaciones: [], notificaciones: [] }
+          : JSON.parse(evento.newValue);
+        if (!validarEstado(estado)) {
+          throw new TypeError('El formato de los datos sincronizados no es válido.');
+        }
+        estadoGuardado = estado;
+        almacenamientoDisponible = true;
+        botonAbrirEscritura.disabled = false;
+        botonGuardarEscritura.disabled = false;
+        renderizarPublicaciones();
+        renderizarNotificaciones();
+        mostrarEstado('La actividad se actualizó desde otra pestaña de este navegador.');
+      } catch (error) {
+        almacenamientoDisponible = false;
+        console.error('No se pudo sincronizar la actividad entre pestañas.', error);
+        mostrarEstado('No se pudo sincronizar la actividad entre pestañas. La edición está deshabilitada.', true);
+        deshabilitarEdicion();
+      }
+    });
+  </script>
+</body>
+</html>

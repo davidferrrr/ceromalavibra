@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobre nosotros | Ciudad Bolívar</title>
+  <link rel="icon" type="image/svg+xml" href="imagenes/logo-pestana.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Fascinate&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Permanent+Marker&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-  <nav class="barra-navegacion">
+  <nav class="barra-navegacion barra-navegacion-sobre">
     <a href="index.html">Inicio</a>
     <a href="sobre-nosotros.html" aria-current="page">Sobre nosotros</a>
-    <a href="index.html#interes">Le podría interesar</a>
+    <a href="le-podria-interesar.html">Le podría interesar</a>
   </nav>
 
   <main class="pagina-sobre-nosotros">
@@ -30,8 +31,11 @@
         <p>Correo: davidf.alvarezc@utadeo.edu.co</p>
         <p>Teléfono: +57 311 452 6840</p>
       </div>
-      <figure class="recuadro-imagen-sobre">
-        <img src="Imagenes/IMG_20250602_140640_342@-24823828.jpg" alt="Paisaje de Ciudad Bolívar">
+      <figure class="recuadro-imagen-sobre" aria-label="Fotografías de Ciudad Bolívar">
+        <img class="foto-collage foto-collage-principal" src="Sobre%20nosotros/IMG_20250618_175710_227@177897455.jpg" alt="Ciudad Bolívar, fotografía principal">
+        <img class="foto-collage foto-collage-superior" src="Sobre%20nosotros/IMG_20250719_182848_533@1010827477.jpg" alt="Otra mirada a Ciudad Bolívar">
+        <img class="foto-collage foto-collage-inferior" src="Sobre%20nosotros/IMG_20250725_180801_148@1184673849.jpg" alt="Un rincón más de Ciudad Bolívar">
+        <figcaption class="leyenda-collage">Ciudad Bolívar, desde distintas miradas</figcaption>
       </figure>
     </section>
   </main>

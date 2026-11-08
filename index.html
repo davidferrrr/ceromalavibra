@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ciudad Bolívar</title>
-  <link rel="icon" type="image/png" href="imagenes/campo%20(1).png">
+  <link rel="icon" type="image/svg+xml" href="imagenes/logo-pestana.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Fascinate&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Permanent+Marker&display=swap" rel="stylesheet">
@@ -12,6 +12,13 @@
   <style>
     .recuadro-video h2 {
       color: #D8C3A5;
+    }
+
+    .frase-localidad {
+      margin: 18px 0 0;
+      color: #F4EFE8;
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      line-height: 1.6;
     }
 
     .carrusel-controles {
@@ -125,6 +132,40 @@
       font-size: 1.2em;
     }
 
+    .indicadores-carrusel {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 18px 0 0;
+    }
+
+    .indicador-carrusel {
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      border: 1px solid #D8C3A5;
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .indicador-carrusel[aria-current="true"] {
+      background: #D8C3A5;
+      box-shadow: 0 0 0 3px rgba(216, 195, 165, 0.18);
+    }
+
+    .indicador-carrusel:focus-visible {
+      outline: 3px solid #F4EFE8;
+      outline-offset: 3px;
+    }
+
+    .descripcion-acciones {
+      margin: 0 0 18px;
+      color: #F4EFE8;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
     @media (max-width: 560px) {
       .carrusel-controles {
         gap: 8px;
@@ -149,15 +190,16 @@
     }
   </style>
 </head>
-<body style="text-align: center;">
+<body class="pagina-inicio" style="text-align: center;">
   <nav class="barra-navegacion">
     <a href="index.html">Inicio</a>
     <a href="sobre-nosotros.html">Sobre nosotros</a>
-    <a href="#interes">Le podría interesar</a>
+    <a href="le-podria-interesar.html">Le podría interesar</a>
   </nav>
 
   <div class="contenedor-titulo-fondo">
     <h1 class="titulo-principal">Ciudad Bolívar</h1>
+    <p class="frase-localidad">Un territorio de memoria, tierra, arte y esfuerzo.</p>
   </div>
 
   <section class="contenedor-menu-fondo" aria-label="Menú principal">
@@ -213,6 +255,7 @@
 
     <section class="recuadro-video" aria-labelledby="titulo-video">
       <h2 id="titulo-video">Acciones que le pueden interesar</h2>
+      <p class="descripcion-acciones">Este espacio está plenamente dedicado a acciones que se están llevando a cabo en la localidad. Para la gente y por la gente.</p>
       <div class="carrusel-controles">
         <button class="flecha-carrusel" type="button" aria-label="Ver video anterior" aria-controls="carrusel-videos">&lsaquo;</button>
         <div class="carrusel-videos" id="carrusel-videos" aria-label="Videos; desliza horizontalmente para ver el siguiente">
@@ -257,15 +300,25 @@
         </div>
         <button class="flecha-carrusel" type="button" aria-label="Ver video siguiente" aria-controls="carrusel-videos">&rsaquo;</button>
       </div>
+      <div class="indicadores-carrusel" role="group" aria-label="Elegir video">
+        <button class="indicador-carrusel" type="button" aria-label="Ir al video 1" aria-controls="carrusel-videos" aria-current="true"></button>
+        <button class="indicador-carrusel" type="button" aria-label="Ir al video 2" aria-controls="carrusel-videos"></button>
+        <button class="indicador-carrusel" type="button" aria-label="Ir al video 3" aria-controls="carrusel-videos"></button>
+      </div>
       <p class="indicacion-carrusel"><span aria-hidden="true">&larr;</span> Desliza para descubrir más videos <span aria-hidden="true">&rarr;</span></p>
     </section>
   </section>
 
   <footer class="pie-pagina">
     <div class="pie-contenido">
-      <p class="pie-titulo">Ciudad Bolívar</p>
-      <p class="pie-subtitulo">Universidad Jorge Tadeo Lozado</p>
-      <p class="pie-detalle">Proyecto de edición digital</p>
+      <div class="pie-proyecto">
+        <p class="pie-subtitulo">Proyecto de edición digital</p>
+        <p class="pie-detalle">Universidad Jorge Tadeo Lozano</p>
+      </div>
+      <div class="pie-creditos">
+        <p class="pie-detalle">Autor: David Fernando Álvarez Cantor</p>
+        <p class="pie-detalle">Contacto: <a href="mailto:davidfernandocantor@gmail.com">davidfernandocantor@gmail.com</a></p>
+      </div>
     </div>
   </footer>
 
@@ -281,14 +334,61 @@
     actualizarFondoMenu();
 
     const carruselVideos = document.getElementById('carrusel-videos');
-    document.querySelectorAll('.flecha-carrusel').forEach((boton, indice) => {
+    const tarjetasVideo = [...carruselVideos.querySelectorAll('.tarjeta-video')];
+    const botonesFlecha = [...document.querySelectorAll('.flecha-carrusel')];
+    const indicadoresVideo = [...document.querySelectorAll('.indicador-carrusel')];
+    const comportamientoDesplazamiento = () =>
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+
+    const actualizarControlesCarrusel = () => {
+      const centroCarrusel = carruselVideos.getBoundingClientRect().left + carruselVideos.clientWidth / 2;
+      const indiceActual = tarjetasVideo.reduce((indiceMasCercano, tarjeta, indice) => {
+        const distanciaActual = Math.abs(tarjeta.getBoundingClientRect().left + tarjeta.offsetWidth / 2 - centroCarrusel);
+        const distanciaMasCercana = Math.abs(
+          tarjetasVideo[indiceMasCercano].getBoundingClientRect().left +
+          tarjetasVideo[indiceMasCercano].offsetWidth / 2 -
+          centroCarrusel
+        );
+        return distanciaActual < distanciaMasCercana ? indice : indiceMasCercano;
+      }, 0);
+
+      indicadoresVideo.forEach((indicador, indice) => {
+        if (indice === indiceActual) {
+          indicador.setAttribute('aria-current', 'true');
+        } else {
+          indicador.removeAttribute('aria-current');
+        }
+      });
+
+      botonesFlecha[0].disabled = carruselVideos.scrollLeft <= 1;
+      botonesFlecha[1].disabled = carruselVideos.scrollLeft + carruselVideos.clientWidth >= carruselVideos.scrollWidth - 1;
+    };
+
+    botonesFlecha.forEach((boton, indice) => {
       boton.addEventListener('click', () => {
         const direccion = indice === 0 ? -1 : 1;
-        const tarjeta = carruselVideos.querySelector('.tarjeta-video');
-        const distancia = tarjeta ? tarjeta.getBoundingClientRect().width + 18 : carruselVideos.clientWidth;
-        carruselVideos.scrollBy({ left: direccion * distancia, behavior: 'smooth' });
+        const tarjeta = tarjetasVideo[0];
+        const estilosCarrusel = getComputedStyle(carruselVideos);
+        const espacio = parseFloat(estilosCarrusel.columnGap) || 0;
+        const distancia = tarjeta ? tarjeta.getBoundingClientRect().width + espacio : carruselVideos.clientWidth;
+        carruselVideos.scrollBy({ left: direccion * distancia, behavior: comportamientoDesplazamiento() });
       });
     });
+
+    indicadoresVideo.forEach((indicador, indice) => {
+      indicador.addEventListener('click', () => {
+        tarjetasVideo[indice]?.scrollIntoView({
+          behavior: comportamientoDesplazamiento(),
+          block: 'nearest',
+          inline: 'start'
+        });
+      });
+    });
+
+    carruselVideos.addEventListener('scroll', actualizarControlesCarrusel, { passive: true });
+    window.addEventListener('resize', actualizarControlesCarrusel);
+    actualizarControlesCarrusel();
+
   </script>
 </body>
 </html>
