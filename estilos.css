@@ -727,6 +727,1862 @@ body {
   }
 }
 
+.pagina-fotografia {
+  box-sizing: border-box;
+  width: min(100%, 1240px);
+  margin: 0 auto;
+  padding: 0 clamp(18px, 5vw, 64px) 72px;
+  color: var(--color-arena-claro);
+}
+
+.portada-fotografia {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: clamp(340px, 52vw, 540px);
+  margin: 0 calc(clamp(18px, 5vw, 64px) * -1) 44px;
+  padding: clamp(36px, 8vw, 96px) clamp(18px, 9vw, 112px);
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-petroleo-oscuro);
+  background-color: var(--color-petroleo-oscuro);
+  text-align: left;
+}
+
+.imagen-portada-fotografia {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transform: scale(1.04);
+  animation: paneo-imagen-fotografia 5s ease-in-out infinite;
+}
+
+.barrido-portada-fotografia {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: min(22%, 220px);
+  background: linear-gradient(90deg, transparent, rgba(244, 239, 232, 0.12), transparent);
+  opacity: 0;
+  pointer-events: none;
+  animation: barrido-luz-fotografia 5s ease-in-out infinite;
+}
+
+.portada-fotografia::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(20, 40, 43, 0.94), rgba(20, 40, 43, 0.66) 58%, rgba(20, 40, 43, 0.3));
+  content: "";
+  pointer-events: none;
+}
+
+.portada-fotografia > *:not(.imagen-portada-fotografia) {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes paneo-imagen-fotografia {
+  0%,
+  12%,
+  100% {
+    transform: scale(1.04) translateX(-1.2%);
+  }
+  48%,
+  62% {
+    transform: scale(1.04) translateX(1.2%);
+  }
+}
+
+@keyframes barrido-luz-fotografia {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
+  18% {
+    opacity: 1;
+  }
+  48% {
+    opacity: 0.65;
+    transform: translateX(520%);
+  }
+  62%,
+  100% {
+    opacity: 0;
+    transform: translateX(520%);
+  }
+}
+
+.portada-fotografia h1 {
+  max-width: 760px;
+  margin: 10px 0;
+  color: var(--color-arena-claro);
+  font-family: "Bona Nova SC", serif;
+  font-size: clamp(2.6rem, 7vw, 5.3rem);
+  line-height: 1.05;
+  animation: enfoque-titulo-fotografia 900ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+@keyframes enfoque-titulo-fotografia {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    letter-spacing: 0.12em;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    letter-spacing: normal;
+    transform: translateY(0);
+  }
+}
+
+.portada-fotografia > p:not(.etiqueta-fotografia) {
+  max-width: 560px;
+  margin: 8px 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.7;
+}
+
+.etiqueta-fotografia,
+.numero-coleccion {
+  margin: 0;
+  color: var(--color-arena);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.indice-fotografia {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.indice-fotografia a {
+  display: flex;
+  min-width: 132px;
+  padding: 11px 15px;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid rgba(216, 195, 165, 0.65);
+  background: rgba(20, 40, 43, 0.72);
+  color: var(--color-arena);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.indice-fotografia a span {
+  color: var(--color-arena-claro);
+  font-family: "Bona Nova SC", serif;
+  font-size: 1rem;
+}
+
+.indice-fotografia a:hover,
+.indice-fotografia a:focus-visible {
+  background: var(--color-petroleo);
+  transform: translateY(-2px);
+}
+
+.indice-fotografia a:focus-visible {
+  outline: 3px solid var(--color-arena-claro);
+  outline-offset: 3px;
+}
+
+.introduccion-fotografia {
+  max-width: 780px;
+  margin: 0 auto 62px;
+  color: rgba(244, 239, 232, 0.88);
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  line-height: 1.8;
+  text-align: center;
+}
+
+.introduccion-fotografia p {
+  margin: 0;
+}
+
+.coleccion-fotografica {
+  padding: clamp(28px, 5vw, 54px) 0;
+  border-top: 1px solid rgba(216, 195, 165, 0.35);
+  scroll-margin-top: 24px;
+}
+
+.desplegable-grafiti {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  transition: grid-template-columns 350ms ease;
+}
+
+.desplegable-grafiti[open] {
+  grid-template-columns: minmax(230px, 0.82fr) minmax(0, 2.18fr);
+}
+
+.portada-grafiti {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  box-sizing: border-box;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid rgba(216, 195, 165, 0.55);
+  background: var(--color-petroleo-oscuro);
+  color: var(--color-arena-claro);
+  cursor: pointer;
+  list-style: none;
+  text-align: left;
+  transition: border-color 180ms ease;
+}
+
+.portada-grafiti::-webkit-details-marker {
+  display: none;
+}
+
+.portada-grafiti::marker {
+  content: "";
+}
+
+.portada-grafiti:hover,
+.portada-grafiti:focus-visible {
+  border-color: var(--color-arena);
+}
+
+.portada-grafiti:focus-visible {
+  outline: 3px solid var(--color-arena-claro);
+  outline-offset: 4px;
+}
+
+.marco-imagen-grafiti {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: clamp(300px, 38vw, 420px);
+  min-width: 0;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-petroleo-oscuro);
+}
+
+.pixeles-grafiti {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image:
+    linear-gradient(rgba(216, 195, 165, 0.76) 0 0),
+    linear-gradient(rgba(36, 75, 85, 0.9) 0 0),
+    linear-gradient(rgba(244, 239, 232, 0.72) 0 0),
+    linear-gradient(rgba(20, 40, 43, 0.9) 0 0),
+    linear-gradient(rgba(216, 195, 165, 0.68) 0 0),
+    linear-gradient(rgba(49, 93, 103, 0.9) 0 0),
+    linear-gradient(rgba(244, 239, 232, 0.68) 0 0),
+    linear-gradient(rgba(20, 40, 43, 0.9) 0 0),
+    linear-gradient(rgba(216, 195, 165, 0.74) 0 0),
+    linear-gradient(rgba(36, 75, 85, 0.9) 0 0),
+    linear-gradient(rgba(244, 239, 232, 0.7) 0 0),
+    linear-gradient(rgba(20, 40, 43, 0.9) 0 0),
+    linear-gradient(rgba(216, 195, 165, 0.7) 0 0),
+    linear-gradient(rgba(49, 93, 103, 0.9) 0 0),
+    linear-gradient(rgba(244, 239, 232, 0.72) 0 0),
+    linear-gradient(rgba(20, 40, 43, 0.9) 0 0);
+  background-repeat: no-repeat;
+  background-size:
+    13px 13px, 9px 9px, 16px 16px, 11px 11px,
+    8px 8px, 15px 15px, 10px 10px, 13px 13px,
+    9px 9px, 16px 16px, 11px 11px, 8px 8px,
+    14px 14px, 10px 10px, 12px 12px, 9px 9px;
+  background-position:
+    4% 12%, 19% 34%, 38% 8%, 61% 27%,
+    82% 13%, 94% 43%, 8% 71%, 27% 88%,
+    48% 62%, 72% 79%, 89% 92%, 55% 46%,
+    33% 21%, 76% 38%, 14% 51%, 96% 68%;
+  pointer-events: none;
+  animation: pixeles-grafiti 2.4s steps(1, end) infinite;
+}
+
+.desplegable-grafiti[open] .pixeles-grafiti {
+  display: none;
+  animation: none;
+}
+
+.imagen-portada-grafiti {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  object-fit: contain;
+  animation: interferencia-foto-grafiti 1.24s steps(1, end) infinite;
+}
+
+.marco-imagen-grafiti::before,
+.marco-imagen-grafiti::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: url("imagenes/portada-grafiti.jpg") center / contain no-repeat;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+}
+
+.marco-imagen-grafiti::before {
+  filter: hue-rotate(145deg) saturate(2);
+  mix-blend-mode: screen;
+  animation: interferencia-cian-grafiti 1.24s steps(1, end) infinite;
+}
+
+.marco-imagen-grafiti::after {
+  filter: sepia(1) hue-rotate(300deg) saturate(2);
+  mix-blend-mode: screen;
+  animation: interferencia-arena-grafiti 1.24s steps(1, end) infinite;
+}
+
+.lineas-grafiti {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.lineas-grafiti span {
+  position: absolute;
+  left: -2%;
+  width: 104%;
+  height: 2px;
+  background: rgba(244, 239, 232, 0.82);
+  box-shadow: 0 0 8px rgba(216, 195, 165, 0.8);
+  opacity: 0;
+  animation: lineas-intermitentes-grafiti 1.24s steps(1, end) infinite;
+}
+
+.lineas-grafiti span:nth-child(1) {
+  top: 17%;
+  animation-delay: 20ms;
+}
+
+.lineas-grafiti span:nth-child(2) {
+  top: 38%;
+  left: 7%;
+  width: 89%;
+  height: 1px;
+  animation-delay: 80ms;
+}
+
+.lineas-grafiti span:nth-child(3) {
+  top: 56%;
+  left: -4%;
+  width: 76%;
+  animation-delay: 130ms;
+}
+
+.lineas-grafiti span:nth-child(4) {
+  top: 73%;
+  left: 12%;
+  width: 92%;
+  height: 3px;
+  animation-delay: 180ms;
+}
+
+.lineas-grafiti span:nth-child(5) {
+  top: 89%;
+  left: -1%;
+  width: 62%;
+  height: 1px;
+  animation-delay: 230ms;
+}
+
+.desplegable-grafiti[open] .portada-grafiti {
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+}
+
+.desplegable-grafiti[open] .imagen-portada-grafiti,
+.desplegable-grafiti[open] .lineas-grafiti {
+  animation: none;
+}
+
+.desplegable-grafiti[open] .marco-imagen-grafiti::before,
+.desplegable-grafiti[open] .marco-imagen-grafiti::after {
+  display: none;
+  animation: none;
+}
+
+.desplegable-grafiti[open] .lineas-grafiti {
+  display: none;
+}
+
+.desplegable-grafiti[open] .marco-imagen-grafiti {
+  height: clamp(240px, 32vw, 360px);
+}
+
+.contenido-portada-grafiti {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  padding: clamp(20px, 4vw, 42px);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #1b383c, var(--color-petroleo-oscuro));
+}
+
+.titulo-portada-grafiti {
+  margin: 0;
+  color: var(--color-arena);
+  font-family: "Permanent Marker", "Bona Nova SC", serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1.05;
+}
+
+.descripcion-portada-grafiti {
+  max-width: 540px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.accion-portada-grafiti {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 10px 14px;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid rgba(244, 239, 232, 0.75);
+  background: rgba(20, 40, 43, 0.76);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-shadow: none;
+}
+
+.accion-grafiti-abierta,
+.desplegable-grafiti[open] .accion-grafiti-cerrada {
+  display: none;
+}
+
+.desplegable-grafiti[open] .accion-grafiti-abierta {
+  display: inline;
+}
+
+.icono-desplegar-grafiti {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  transition: transform 250ms ease;
+}
+
+.desplegable-grafiti[open] .icono-desplegar-grafiti {
+  transform: rotate(180deg);
+}
+
+.contenido-grafiti {
+  display: none;
+  min-width: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.desplegable-grafiti[open] .contenido-grafiti {
+  display: grid;
+}
+
+.lugar-grafiti {
+  position: relative;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(216, 195, 165, 0.42);
+  background: rgba(36, 75, 85, 0.28);
+  isolation: isolate;
+  overflow: hidden;
+  text-align: left;
+  animation: entrada-glitch-lugar 680ms steps(1, end) both;
+}
+
+.lugar-grafiti::before,
+.lugar-grafiti::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lugar-grafiti::before {
+  background:
+    linear-gradient(rgba(71, 213, 223, 0.82) 0 0) 0 20% / 100% 3px no-repeat,
+    linear-gradient(rgba(71, 213, 223, 0.55) 0 0) 0 65% / 72% 8px no-repeat,
+    linear-gradient(rgba(216, 195, 165, 0.68) 0 0) 100% 42% / 84% 2px no-repeat;
+  animation: barrido-glitch-lugar 2.8s steps(1, end) infinite;
+}
+
+.lugar-grafiti::after {
+  background:
+    linear-gradient(rgba(216, 195, 165, 0.76) 0 0) 100% 32% / 68% 4px no-repeat,
+    linear-gradient(rgba(71, 213, 223, 0.58) 0 0) 0 78% / 92% 2px no-repeat;
+  animation: destello-glitch-lugar 2.8s steps(1, end) infinite;
+}
+
+.lugar-grafiti:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.lugar-grafiti:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.lugar-grafiti:nth-child(2)::before,
+.lugar-grafiti:nth-child(2)::after {
+  animation-delay: 90ms;
+}
+
+.lugar-grafiti:nth-child(3)::before,
+.lugar-grafiti:nth-child(3)::after {
+  animation-delay: 180ms;
+}
+
+.numero-lugar-grafiti {
+  color: var(--color-arena);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+}
+
+.lugar-grafiti h3 {
+  min-height: 2.8em;
+  margin: 8px 0 12px;
+  color: var(--color-arena-claro);
+  font-family: "Bona Nova SC", serif;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.3;
+}
+
+.lugar-grafiti .espacio-fotografia {
+  min-height: 130px;
+  aspect-ratio: 4 / 3;
+}
+
+.imagen-lugar-grafiti {
+  display: block;
+  width: 100%;
+  min-height: 130px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.boton-galeria-paraiso {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 10px 14px;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid rgba(216, 195, 165, 0.6);
+  background: var(--color-petroleo);
+  color: var(--color-arena-claro);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.boton-galeria-paraiso:hover,
+.boton-galeria-paraiso:focus-visible {
+  border-color: var(--color-arena);
+  background: #315d67;
+  transform: translateY(-2px);
+}
+
+.boton-galeria-paraiso:focus-visible {
+  outline: 3px solid var(--color-arena-claro);
+  outline-offset: 3px;
+}
+
+.descripcion-paraiso {
+  margin: 12px 0 0;
+  color: rgba(244, 239, 232, 0.82);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.pagina-paraiso {
+  box-sizing: border-box;
+  width: min(100%, 1240px);
+  margin: 0 auto;
+  padding: 0 clamp(18px, 5vw, 64px) 72px;
+  color: var(--color-arena-claro);
+}
+
+.portada-paraiso {
+  display: flex;
+  min-height: clamp(280px, 38vw, 420px);
+  margin: 0 calc(clamp(18px, 5vw, 64px) * -1) 44px;
+  padding: clamp(32px, 7vw, 76px) clamp(18px, 9vw, 112px);
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background:
+    linear-gradient(90deg, rgba(20, 40, 43, 0.92), rgba(20, 40, 43, 0.44)),
+    url("Paraíso/Portada Paraíso.jpg") center 48% / cover;
+  text-align: left;
+}
+
+.portada-paraiso h1 {
+  margin: 10px 0;
+  color: var(--color-arena-claro);
+  font-family: "Bona Nova SC", serif;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  line-height: 1.05;
+}
+
+.portada-paraiso > p:last-child {
+  max-width: 620px;
+  margin: 8px 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.7;
+}
+
+.coleccion-paraiso {
+  padding-top: 12px;
+}
+
+.encabezado-coleccion-paraiso {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.encabezado-coleccion-paraiso h2 {
+  margin: 8px 0 0;
+  color: var(--color-arena);
+  font-family: "Bona Nova SC", serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+}
+
+.rejilla-paraiso {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.2vw, 24px);
+  align-items: start;
+}
+
+.foto-paraiso {
+  min-width: 0;
+  margin: 0;
+  padding: 9px;
+  border: 1px solid rgba(216, 195, 165, 0.36);
+  background: rgba(36, 75, 85, 0.28);
+}
+
+.foto-paraiso a {
+  display: block;
+  overflow: hidden;
+  background: var(--color-petroleo-oscuro);
+}
+
+.foto-paraiso img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 240ms ease;
+}
+
+.foto-paraiso a:hover img,
+.foto-paraiso a:focus-visible img {
+  transform: scale(1.025);
+}
+
+.foto-paraiso a:focus-visible {
+  outline: 3px solid var(--color-arena-claro);
+  outline-offset: 3px;
+}
+
+.foto-paraiso figcaption {
+  padding: 10px 3px 2px;
+  color: rgba(244, 239, 232, 0.72);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-align: left;
+}
+
+.lugar-grafiti .espacio-fotografia,
+.lugar-grafiti .imagen-lugar-grafiti {
+  animation: interferencia-foto-grafiti 1.24s steps(1, end) infinite;
+}
+
+.lugar-grafiti:nth-child(2) .espacio-fotografia,
+.lugar-grafiti:nth-child(2) .imagen-lugar-grafiti {
+  animation-delay: 90ms;
+}
+
+.lugar-grafiti:nth-child(3) .espacio-fotografia,
+.lugar-grafiti:nth-child(3) .imagen-lugar-grafiti {
+  animation-delay: 180ms;
+}
+
+.indicacion-lugar-grafiti {
+  margin: 12px 0 0;
+  color: rgba(244, 239, 232, 0.72);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.desplegable-urbanidad {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  transition: grid-template-columns 350ms ease;
+}
+
+.desplegable-urbanidad[open] {
+  grid-template-columns: minmax(230px, 0.82fr) minmax(0, 2.18fr);
+}
+
+.portada-urbanidad {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  box-sizing: border-box;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid rgba(216, 195, 165, 0.55);
+  background: #192f32;
+  color: var(--color-arena-claro);
+  cursor: pointer;
+  list-style: none;
+  text-align: left;
+  transition: border-color 180ms ease;
+}
+
+.portada-urbanidad::-webkit-details-marker {
+  display: none;
+}
+
+.portada-urbanidad::marker {
+  content: "";
+}
+
+.portada-urbanidad:hover,
+.portada-urbanidad:focus-visible {
+  border-color: var(--color-arena);
+}
+
+.portada-urbanidad:focus-visible {
+  outline: 3px solid var(--color-arena-claro);
+  outline-offset: 4px;
+}
+
+.mapa-urbanidad {
+  display: block;
+  min-width: 0;
+  min-height: 320px;
+  overflow: hidden;
+  background-color: #203b3e;
+  background-image:
+    linear-gradient(rgba(216, 195, 165, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(216, 195, 165, 0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.mapa-urbanidad svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.calle-urbanidad {
+  fill: none;
+  stroke: rgba(244, 239, 232, 0.28);
+  stroke-width: 13;
+  stroke-linecap: square;
+  stroke-linejoin: bevel;
+}
+
+.calle-secundaria-urbanidad {
+  stroke: rgba(216, 195, 165, 0.2);
+  stroke-width: 7;
+}
+
+.recorrido-urbanidad {
+  fill: none;
+  stroke: #f0bf72;
+  stroke-width: 3;
+  stroke-dasharray: 8 15;
+  animation: recorrido-ciudad 3.2s linear infinite;
+}
+
+.punto-urbanidad {
+  fill: #f0bf72;
+  stroke: rgba(240, 191, 114, 0.35);
+  stroke-width: 8;
+  animation: pulso-ciudad 1.8s ease-out infinite;
+}
+
+.punto-urbanidad:nth-of-type(2) {
+  animation-delay: 600ms;
+}
+
+.punto-urbanidad:nth-of-type(3) {
+  animation-delay: 1200ms;
+}
+
+.contenido-portada-urbanidad {
+  display: flex;
+  min-width: 0;
+  padding: clamp(20px, 4vw, 42px);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #1b383c, var(--color-petroleo-oscuro));
+}
+
+.contenido-portada-urbanidad h2 {
+  margin: 0;
+  color: var(--color-arena);
+  font-family: "Bona Nova SC", serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1.05;
+}
+
+.descripcion-portada-urbanidad {
+  max-width: 540px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.accion-portada-urbanidad {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 10px 14px;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid rgba(244, 239, 232, 0.75);
+  background: rgba(20, 40, 43, 0.76);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.accion-urbanidad-abierta,
+.desplegable-urbanidad[open] .accion-urbanidad-cerrada {
+  display: none;
+}
+
+.desplegable-urbanidad[open] .accion-urbanidad-abierta {
+  display: inline;
+}
+
+.icono-urbanidad {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  transition: transform 250ms ease;
+}
+
+.desplegable-urbanidad[open] .icono-urbanidad {
+  transform: rotate(180deg);
+}
+
+.desplegable-urbanidad[open] .portada-urbanidad {
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+}
+
+.desplegable-urbanidad[open] .mapa-urbanidad {
+  min-height: 230px;
+}
+
+.desplegable-urbanidad[open] .recorrido-urbanidad,
+.desplegable-urbanidad[open] .punto-urbanidad {
+  animation-play-state: paused;
+}
+
+.registros-urbanidad {
+  display: none;
+  min-width: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.desplegable-urbanidad[open] .registros-urbanidad {
+  display: grid;
+}
+
+.registro-urbanidad {
+  position: relative;
+  min-width: 0;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(216, 195, 165, 0.42);
+  background: rgba(36, 75, 85, 0.28);
+  isolation: isolate;
+  text-align: left;
+  animation: entrada-registro-urbanidad 500ms ease-out both;
+}
+
+.registro-urbanidad:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.registro-urbanidad:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.registro-urbanidad::after {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: -45%;
+  width: 28%;
+  background: linear-gradient(90deg, transparent, rgba(240, 191, 114, 0.2), transparent);
+  content: "";
+  pointer-events: none;
+  animation: luz-calle-urbanidad 3s ease-in-out infinite;
+}
+
+.registro-urbanidad:nth-child(2)::after {
+  animation-delay: 450ms;
+}
+
+.registro-urbanidad:nth-child(3)::after {
+  animation-delay: 900ms;
+}
+
+.numero-registro-urbanidad {
+  color: #f0bf72;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+}
+
+.registro-urbanidad h3 {
+  min-height: 2.8em;
+  margin: 8px 0 12px;
+  color: var(--color-arena-claro);
+  font-family: "Bona Nova SC", serif;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.3;
+}
+
+.registro-urbanidad .espacio-fotografia {
+  min-height: 130px;
+  aspect-ratio: 4 / 3;
+  background:
+    linear-gradient(90deg, transparent 48%, rgba(240, 191, 114, 0.13) 49% 51%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, rgba(240, 191, 114, 0.13) 49% 51%, transparent 52%),
+    #1b383c;
+  background-size: 44px 44px;
+}
+
+.registro-urbanidad p:last-child {
+  margin: 12px 0 0;
+  color: rgba(244, 239, 232, 0.72);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+@keyframes recorrido-ciudad {
+  to {
+    stroke-dashoffset: -92;
+  }
+}
+
+@keyframes pulso-ciudad {
+  0% {
+    stroke-width: 2;
+    opacity: 1;
+  }
+  100% {
+    stroke-width: 16;
+    opacity: 0.25;
+  }
+}
+
+@keyframes entrada-registro-urbanidad {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes luz-calle-urbanidad {
+  0%,
+  18% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  32% {
+    opacity: 1;
+  }
+  64%,
+  100% {
+    transform: translateX(520%);
+    opacity: 0;
+  }
+}
+
+.desplegable-ruralidad {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  transition: grid-template-columns 350ms ease;
+}
+
+.desplegable-ruralidad[open] {
+  grid-template-columns: minmax(230px, 0.82fr) minmax(0, 2.18fr);
+}
+
+.portada-ruralidad {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  box-sizing: border-box;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid rgba(216, 195, 165, 0.55);
+  background: #25392f;
+  color: var(--color-arena-claro);
+  cursor: pointer;
+  list-style: none;
+  text-align: left;
+  transition: border-color 180ms ease;
+}
+
+.portada-ruralidad::-webkit-details-marker {
+  display: none;
+}
+
+.portada-ruralidad::marker {
+  content: "";
+}
+
+.portada-ruralidad:hover,
+.portada-ruralidad:focus-visible {
+  border-color: #b9c68a;
+}
+
+.portada-ruralidad:focus-visible {
+  outline: 3px solid var(--color-arena-claro);
+  outline-offset: 4px;
+}
+
+.paisaje-ruralidad {
+  display: block;
+  min-width: 0;
+  min-height: 320px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #617b71 0%, #b4a779 68%, #344d3a 100%);
+}
+
+.paisaje-ruralidad svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sol-ruralidad {
+  fill: #e6ca82;
+  filter: drop-shadow(0 0 16px rgba(230, 202, 130, 0.4));
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sol-ruralidad-latido 5s ease-in-out infinite;
+}
+
+.montana-fondo-ruralidad {
+  fill: #718777;
+}
+
+.montana-media-ruralidad {
+  fill: #536f57;
+}
+
+.loma-ruralidad {
+  fill: #344f3c;
+}
+
+.surco-ruralidad {
+  fill: none;
+  stroke: rgba(192, 176, 113, 0.42);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 3 10;
+  animation: surcos-ruralidad 16s linear infinite;
+}
+
+.sendero-ruralidad {
+  fill: none;
+  stroke: #dfc991;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 2 12;
+  animation: sendero-ruralidad 9s linear infinite;
+}
+
+.rio-ruralidad {
+  fill: none;
+  stroke: rgba(177, 205, 184, 0.72);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 12 16;
+  animation: rio-ruralidad 11s linear infinite;
+}
+
+.contenido-portada-ruralidad {
+  display: flex;
+  min-width: 0;
+  padding: clamp(20px, 4vw, 42px);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #344b3b, #1d3028);
+}
+
+.contenido-portada-ruralidad h2 {
+  margin: 0;
+  color: #d7d1a3;
+  font-family: "Bona Nova SC", serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1.05;
+}
+
+.descripcion-portada-ruralidad {
+  max-width: 540px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.accion-portada-ruralidad {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 10px 14px;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid rgba(244, 239, 232, 0.75);
+  background: rgba(20, 40, 43, 0.58);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.accion-ruralidad-abierta,
+.desplegable-ruralidad[open] .accion-ruralidad-cerrada {
+  display: none;
+}
+
+.desplegable-ruralidad[open] .accion-ruralidad-abierta {
+  display: inline;
+}
+
+.icono-ruralidad {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  transition: transform 250ms ease;
+}
+
+.desplegable-ruralidad[open] .icono-ruralidad {
+  transform: rotate(180deg);
+}
+
+.desplegable-ruralidad[open] .portada-ruralidad {
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+}
+
+.desplegable-ruralidad[open] .paisaje-ruralidad {
+  min-height: 230px;
+}
+
+.desplegable-ruralidad[open] .sendero-ruralidad,
+.desplegable-ruralidad[open] .rio-ruralidad,
+.desplegable-ruralidad[open] .surco-ruralidad {
+  animation-play-state: paused;
+}
+
+.registros-ruralidad {
+  display: none;
+  min-width: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.desplegable-ruralidad[open] .registros-ruralidad {
+  display: grid;
+}
+
+.registro-ruralidad {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(185, 198, 138, 0.4);
+  background: linear-gradient(155deg, rgba(74, 99, 68, 0.32), rgba(36, 57, 47, 0.44));
+  text-align: left;
+  animation: entrada-registro-ruralidad 700ms ease-out both;
+}
+
+.registro-ruralidad:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.registro-ruralidad:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.numero-registro-ruralidad {
+  color: #c6c28e;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+}
+
+.registro-ruralidad h3 {
+  min-height: 2.8em;
+  margin: 8px 0 12px;
+  color: var(--color-arena-claro);
+  font-family: "Bona Nova SC", serif;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.3;
+}
+
+.registro-ruralidad .espacio-fotografia {
+  min-height: 130px;
+  aspect-ratio: 4 / 3;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(166, 177, 119, 0.22), transparent 68%),
+    linear-gradient(160deg, #435c48, #263d32);
+}
+
+.registro-ruralidad p:last-child {
+  margin: 12px 0 0;
+  color: rgba(244, 239, 232, 0.76);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+@keyframes sol-ruralidad-latido {
+  0%,
+  100% {
+    opacity: 0.82;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes surcos-ruralidad {
+  to {
+    stroke-dashoffset: -104;
+  }
+}
+
+@keyframes sendero-ruralidad {
+  to {
+    stroke-dashoffset: -56;
+  }
+}
+
+@keyframes rio-ruralidad {
+  to {
+    stroke-dashoffset: 112;
+  }
+}
+
+@keyframes entrada-registro-ruralidad {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pixeles-grafiti {
+  0% {
+    background-position:
+      4% 12%, 19% 34%, 38% 8%, 61% 27%,
+      82% 13%, 94% 43%, 8% 71%, 27% 88%,
+      48% 62%, 72% 79%, 89% 92%, 55% 46%,
+      33% 21%, 76% 38%, 14% 51%, 96% 68%;
+  }
+  25% {
+    background-position:
+      15% 28%, 31% 9%, 52% 32%, 78% 12%,
+      91% 55%, 68% 73%, 18% 84%, 43% 46%,
+      62% 91%, 7% 39%, 35% 68%, 86% 25%,
+      24% 53%, 57% 16%, 97% 82%, 73% 61%;
+  }
+  50% {
+    background-position:
+      9% 62%, 26% 79%, 45% 51%, 71% 88%,
+      88% 31%, 57% 11%, 3% 42%, 39% 18%,
+      66% 57%, 95% 76%, 21% 25%, 49% 94%,
+      80% 47%, 12% 9%, 34% 83%, 61% 35%;
+  }
+  75% {
+    background-position:
+      22% 43%, 42% 91%, 64% 19%, 93% 63%,
+      75% 4%, 31% 58%, 11% 22%, 53% 78%,
+      84% 86%, 17% 69%, 47% 37%, 69% 97%,
+      5% 49%, 37% 3%, 90% 27%, 58% 71%;
+  }
+  100% {
+    background-position:
+      4% 12%, 19% 34%, 38% 8%, 61% 27%,
+      82% 13%, 94% 43%, 8% 71%, 27% 88%,
+      48% 62%, 72% 79%, 89% 92%, 55% 46%,
+      33% 21%, 76% 38%, 14% 51%, 96% 68%;
+  }
+}
+
+@keyframes interferencia-foto-grafiti {
+  0%,
+  2%,
+  5%,
+  8%,
+  11%,
+  14%,
+  18%,
+  100% {
+    transform: translateX(0);
+    filter: none;
+    clip-path: inset(0);
+  }
+  1% {
+    transform: translate(-9px, 1px) skewX(-1.5deg);
+    filter: contrast(1.7) saturate(1.6);
+    clip-path: inset(12% 0 61% 0);
+  }
+  3% {
+    transform: translate(8px, -1px) skewX(1.2deg);
+    filter: contrast(1.4) hue-rotate(25deg);
+    clip-path: inset(48% 0 28% 0);
+  }
+  6% {
+    transform: translate(-6px, 0) skewX(-0.8deg);
+    filter: contrast(1.8) saturate(0.7);
+    clip-path: inset(72% 0 9% 0);
+  }
+  9% {
+    transform: translate(5px, 1px);
+    filter: contrast(1.6) hue-rotate(-18deg);
+    clip-path: inset(26% 0 49% 0);
+  }
+  12% {
+    transform: translate(-3px, -1px) skewX(0.7deg);
+    filter: contrast(1.5) saturate(1.8);
+    clip-path: inset(57% 0 20% 0);
+  }
+  15% {
+    transform: translate(2px, 0);
+    filter: contrast(1.3);
+    clip-path: inset(5% 0 82% 0);
+  }
+}
+
+@keyframes interferencia-cian-grafiti {
+  0%,
+  4%,
+  10%,
+  16%,
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+    clip-path: inset(0);
+  }
+  1%,
+  5%,
+  11% {
+    opacity: 0.72;
+    transform: translateX(8px);
+    clip-path: inset(14% 0 68% 0);
+  }
+  2%,
+  7%,
+  13% {
+    opacity: 0.62;
+    transform: translateX(-6px);
+    clip-path: inset(53% 0 24% 0);
+  }
+  3%,
+  8%,
+  15% {
+    opacity: 0.68;
+    transform: translateX(5px);
+    clip-path: inset(78% 0 8% 0);
+  }
+}
+
+@keyframes interferencia-arena-grafiti {
+  0%,
+  3%,
+  8%,
+  14%,
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+    clip-path: inset(0);
+  }
+  1%,
+  6%,
+  12% {
+    opacity: 0.58;
+    transform: translateX(-7px);
+    clip-path: inset(38% 0 43% 0);
+  }
+  2%,
+  5%,
+  10% {
+    opacity: 0.7;
+    transform: translateX(5px);
+    clip-path: inset(4% 0 81% 0);
+  }
+  4%,
+  9%,
+  13% {
+    opacity: 0.64;
+    transform: translateX(-4px);
+    clip-path: inset(69% 0 13% 0);
+  }
+}
+
+@keyframes lineas-intermitentes-grafiti {
+  0%,
+  2%,
+  4%,
+  6%,
+  8%,
+  10%,
+  12%,
+  14%,
+  16%,
+  18%,
+  20%,
+  100% {
+    opacity: 0;
+  }
+  1%,
+  3%,
+  5%,
+  7%,
+  9%,
+  11%,
+  13%,
+  15%,
+  17%,
+  19% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes entrada-glitch-lugar {
+  0% {
+    opacity: 0;
+    transform: translateX(-24px);
+    clip-path: inset(0 100% 0 0);
+  }
+  8% {
+    opacity: 1;
+    transform: translateX(15px) skewX(-2deg);
+    clip-path: inset(0 0 58% 0);
+  }
+  19% {
+    transform: translateX(-12px) skewX(1deg);
+    clip-path: inset(34% 0 38% 0);
+  }
+  31% {
+    transform: translateX(9px);
+    clip-path: inset(69% 0 12% 0);
+  }
+  43% {
+    transform: translateX(-7px) skewX(-1deg);
+    clip-path: inset(10% 0 72% 0);
+  }
+  56% {
+    transform: translateX(5px);
+    clip-path: inset(0 0 0 0);
+  }
+  68% {
+    transform: translateX(-3px);
+    clip-path: inset(0 0 0 0);
+  }
+  82%,
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes barrido-glitch-lugar {
+  0%,
+  5%,
+  10%,
+  15%,
+  20%,
+  100% {
+    opacity: 0;
+  }
+  1%,
+  7%,
+  12%,
+  17% {
+    opacity: 1;
+    transform: translateX(8px);
+    clip-path: inset(14% 0 70% 0);
+  }
+  3%,
+  9%,
+  14%,
+  19% {
+    opacity: 0.9;
+    transform: translateX(-7px);
+    clip-path: inset(72% 0 10% 0);
+  }
+}
+
+@keyframes destello-glitch-lugar {
+  0%,
+  4%,
+  9%,
+  14%,
+  19%,
+  100% {
+    opacity: 0;
+  }
+  2%,
+  7%,
+  12%,
+  17% {
+    opacity: 0.95;
+    transform: translateX(-9px);
+    clip-path: inset(43% 0 39% 0);
+  }
+  1%,
+  6%,
+  11%,
+  16% {
+    opacity: 0.82;
+    transform: translateX(6px);
+    clip-path: inset(4% 0 82% 0);
+  }
+}
+
+.encabezado-coleccion {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.encabezado-coleccion h2 {
+  margin: 7px 0 5px;
+  color: var(--color-arena);
+  font-family: "Bona Nova SC", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.encabezado-coleccion > p:last-child {
+  margin: 0;
+  color: rgba(244, 239, 232, 0.82);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.rejilla-fotografica {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 22px);
+}
+
+.marco-fotografico {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(216, 195, 165, 0.36);
+  background: rgba(36, 75, 85, 0.28);
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.marco-fotografico:hover {
+  border-color: rgba(216, 195, 165, 0.8);
+  transform: translateY(-3px);
+}
+
+.espacio-fotografia {
+  position: relative;
+  display: grid;
+  min-height: 180px;
+  aspect-ratio: 4 / 3;
+  place-items: center;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(216, 195, 165, 0.07) 25%, transparent 25%) 0 0 / 24px 24px,
+    linear-gradient(315deg, rgba(216, 195, 165, 0.07) 25%, transparent 25%) 0 0 / 24px 24px,
+    #1b383c;
+  color: rgba(244, 239, 232, 0.65);
+}
+
+.marca-fotografia {
+  position: absolute;
+  top: 12px;
+  left: 13px;
+  color: var(--color-arena);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.texto-espacio-fotografia {
+  padding: 12px;
+  border: 1px dashed rgba(216, 195, 165, 0.42);
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+}
+
+.pie-fotografia {
+  padding: 12px 4px 3px;
+  text-align: left;
+}
+
+.pie-fotografia h3 {
+  margin: 0;
+  color: var(--color-arena-claro);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.pie-fotografia p {
+  margin: 6px 0 0;
+  color: rgba(244, 239, 232, 0.65);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 700px) {
+  .rejilla-fotografica {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rejilla-paraiso {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .desplegable-grafiti[open] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .desplegable-urbanidad[open] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .desplegable-ruralidad[open] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mapa-urbanidad,
+  .desplegable-urbanidad[open] .mapa-urbanidad {
+    min-height: 270px;
+  }
+
+  .paisaje-ruralidad,
+  .desplegable-ruralidad[open] .paisaje-ruralidad {
+    min-height: 270px;
+  }
+
+  .registros-urbanidad {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .registros-ruralidad {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .registro-urbanidad h3 {
+    min-height: 0;
+  }
+
+  .registro-ruralidad h3 {
+    min-height: 0;
+  }
+
+  .marco-imagen-grafiti,
+  .desplegable-grafiti[open] .marco-imagen-grafiti {
+    height: clamp(260px, 65vw, 400px);
+  }
+
+  .contenido-grafiti {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lugar-grafiti h3 {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 460px) {
+  .portada-fotografia {
+    min-height: 430px;
+  }
+
+  .indice-fotografia {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .indice-fotografia a {
+    justify-content: flex-start;
+  }
+
+  .rejilla-fotografica {
+    grid-template-columns: 1fr;
+  }
+
+  .rejilla-paraiso {
+    grid-template-columns: 1fr;
+  }
+
+  .portada-grafiti {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .marco-imagen-grafiti,
+  .desplegable-grafiti[open] .marco-imagen-grafiti {
+    height: clamp(250px, 82vw, 360px);
+  }
+
+  .contenido-portada-grafiti {
+    padding: 22px;
+  }
+
+  .contenido-grafiti {
+    grid-template-columns: 1fr;
+  }
+
+  .portada-urbanidad {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mapa-urbanidad,
+  .desplegable-urbanidad[open] .mapa-urbanidad {
+    min-height: 240px;
+  }
+
+  .portada-ruralidad {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .paisaje-ruralidad,
+  .desplegable-ruralidad[open] .paisaje-ruralidad {
+    min-height: 240px;
+  }
+
+  .contenido-portada-urbanidad {
+    padding: 22px;
+  }
+
+  .contenido-portada-ruralidad {
+    padding: 22px;
+  }
+
+  .registros-urbanidad {
+    grid-template-columns: 1fr;
+  }
+
+  .registros-ruralidad {
+    grid-template-columns: 1fr;
+  }
+
+  .espacio-fotografia {
+    aspect-ratio: 5 / 3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .indice-fotografia a,
+  .marco-fotografico,
+  .desplegable-grafiti,
+  .portada-grafiti,
+  .desplegable-urbanidad,
+  .portada-urbanidad,
+  .desplegable-ruralidad,
+  .portada-ruralidad,
+  .icono-desplegar-grafiti,
+  .icono-urbanidad,
+  .icono-ruralidad,
+  .portada-fotografia h1,
+  .imagen-portada-fotografia,
+  .barrido-portada-fotografia {
+    transition: none;
+    animation: none;
+  }
+
+  .desplegable-grafiti[open] .contenido-grafiti {
+    animation: none;
+  }
+
+  .recorrido-urbanidad,
+  .punto-urbanidad,
+  .registro-urbanidad,
+  .registro-urbanidad::after,
+  .registro-ruralidad,
+  .sol-ruralidad,
+  .surco-ruralidad,
+  .sendero-ruralidad,
+  .rio-ruralidad {
+    animation: none;
+  }
+
+  .lugar-grafiti,
+  .pixeles-grafiti,
+  .imagen-portada-grafiti,
+  .lineas-grafiti span,
+  .lugar-grafiti .espacio-fotografia,
+  .lugar-grafiti .imagen-lugar-grafiti {
+    animation: none;
+  }
+
+  .lugar-grafiti::before,
+  .lugar-grafiti::after {
+    display: none;
+    animation: none;
+  }
+
+  .marco-imagen-grafiti::before,
+  .marco-imagen-grafiti::after {
+    display: none;
+    animation: none;
+  }
+
+  .pixeles-grafiti,
+  .lineas-grafiti {
+    display: none;
+  }
+}
+
 .pagina-sobre-nosotros {
   position: relative;
   display: flex;
