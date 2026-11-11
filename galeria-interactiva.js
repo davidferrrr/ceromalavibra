@@ -51,7 +51,6 @@ grids.forEach((grid, galleryIndex) => {
       </div>
       <div class="visor-galeria-pie">
         <h2 id="titulo-visor-galeria-${galleryIndex + 1}"></h2>
-        <dl class="metadatos-fotografia"></dl>
       </div>
     </div>`;
   document.body.append(dialog);
@@ -59,36 +58,18 @@ grids.forEach((grid, galleryIndex) => {
   const image = dialog.querySelector('.visor-galeria-imagen');
   const counter = dialog.querySelector('.visor-galeria-contador');
   const heading = dialog.querySelector('.visor-galeria-pie h2');
-  const metadata = dialog.querySelector('.visor-galeria-pie .metadatos-fotografia');
   let activeIndex = 0;
-
-  entries.forEach((entry) => {
-    const details = document.createElement('dl');
-    details.className = 'metadatos-fotografia';
-    for (const [key, label] of [['year', 'Año'], ['author', 'Autor']]) {
-      const row = document.createElement('div');
-      const term = document.createElement('dt');
-      const value = document.createElement('dd');
-      term.textContent = label;
-      value.textContent = entry.dataset[key] || 'Por agregar';
-      row.append(term, value);
-      details.append(row);
-    }
-    entry.append(details);
-  });
 
   const showEntry = (index) => {
     activeIndex = (index + entries.length) % entries.length;
     const entry = entries[activeIndex];
     const link = entry.querySelector('a');
     const thumbnail = link.querySelector('img');
-    const details = entry.querySelector('.metadatos-fotografia');
 
     image.src = link.href;
     image.alt = thumbnail.alt;
     counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(entries.length).padStart(2, '0')}`;
     heading.textContent = entry.querySelector('figcaption').textContent;
-    metadata.replaceChildren(...Array.from(details.children, (row) => row.cloneNode(true)));
   };
 
   grid.addEventListener('click', (event) => {

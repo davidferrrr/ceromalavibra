@@ -191,7 +191,7 @@ body {
   border-bottom: 1px solid rgba(216, 195, 165, 0.42);
   background-image:
     linear-gradient(90deg, rgba(20, 40, 43, 0.84), rgba(20, 40, 43, 0.48) 55%, rgba(20, 40, 43, 0.78)),
-    url("imagenes/IMG_20250607_165832_235@-1854612948.jpg");
+    url("imagenes/IMG_20261103_165315_961.jpg");
   background-size: cover;
   background-position: center 70%;
   content: "";
@@ -488,6 +488,162 @@ body {
   max-width: 68ch;
 }
 
+.pagina-inicio .coleccion-destacada-paraiso {
+  box-sizing: border-box;
+  width: min(100% - 36px, 780px);
+  margin: 0 auto;
+}
+
+.enlace-destacado-paraiso {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  overflow: hidden;
+  border: 1px solid rgba(216, 195, 165, 0.48);
+  background: linear-gradient(120deg, #1b383c, #25392f);
+  color: var(--color-arena-claro);
+  text-align: left;
+  transition: border-color 180ms ease;
+}
+
+.enlace-destacado-paraiso:hover {
+  border-color: var(--color-arena);
+}
+
+.carrusel-destacado-paraiso {
+  min-width: 0;
+  padding: 14px;
+}
+
+.pista-destacado-paraiso {
+  position: relative;
+  width: 100%;
+  height: clamp(150px, 22vw, 190px);
+  overflow: hidden;
+  background: #102629;
+}
+
+.pista-destacado-paraiso img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+  transition: transform 350ms ease;
+}
+
+.controles-destacado-paraiso {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.flecha-destacado-paraiso {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(216, 195, 165, 0.6);
+  background: rgba(20, 40, 43, 0.72);
+  color: var(--color-arena-claro);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.flecha-destacado-paraiso:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.flecha-destacado-paraiso:focus-visible,
+.indicadores-destacado-paraiso button:focus-visible,
+.accion-destacado-paraiso:focus-visible {
+  outline: 3px solid var(--color-arena-claro);
+  outline-offset: 3px;
+}
+
+.indicadores-destacado-paraiso {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.indicadores-destacado-paraiso button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid var(--color-arena);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.indicadores-destacado-paraiso button[aria-current="true"] {
+  background: var(--color-arena);
+}
+
+.estado-destacado-paraiso {
+  margin: 7px 0 0;
+  color: rgba(244, 239, 232, 0.72);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.contenido-destacado-paraiso {
+  display: flex;
+  min-width: 0;
+  padding: clamp(18px, 3vw, 28px);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+}
+
+.etiqueta-destacado-paraiso {
+  color: var(--color-arena);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.titulo-destacado-paraiso {
+  font-family: "Bona Nova SC", serif;
+  font-size: clamp(1.7rem, 3vw, 2.25rem);
+  line-height: 1.1;
+}
+
+.descripcion-destacado-paraiso {
+  max-width: 38ch;
+  color: rgba(244, 239, 232, 0.84);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.accion-destacado-paraiso {
+  display: inline-flex;
+  margin-top: 4px;
+  gap: 8px;
+  align-items: center;
+  color: var(--color-arena);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pista-destacado-paraiso img {
+    transition: none;
+  }
+}
+
 .pagina-inicio .seccion-audios {
   margin: 0 auto;
   align-self: start;
@@ -554,8 +710,21 @@ body {
 
   .pagina-inicio .caja-descripcion,
   .pagina-inicio .seccion-audios,
-  .pagina-inicio .recuadro-video {
+  .pagina-inicio .recuadro-video,
+  .pagina-inicio .coleccion-destacada-paraiso {
     width: min(100% - 28px, 780px);
+  }
+
+  .enlace-destacado-paraiso {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pista-destacado-paraiso {
+    height: 150px;
+  }
+
+  .contenido-destacado-paraiso {
+    padding: 18px;
   }
 }
 
@@ -1444,6 +1613,31 @@ body {
   transition: border-color 180ms ease, transform 180ms ease, background-color 180ms ease;
 }
 
+.desplegable-urbanidad[open] .foto-coleccion-barrio,
+.desplegable-ruralidad[open] .foto-coleccion-barrio {
+  animation: revelar-foto-coleccion 520ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.desplegable-urbanidad[open] .foto-coleccion-barrio:nth-child(5n + 2),
+.desplegable-ruralidad[open] .foto-coleccion-barrio:nth-child(5n + 2) {
+  animation-delay: 70ms;
+}
+
+.desplegable-urbanidad[open] .foto-coleccion-barrio:nth-child(5n + 3),
+.desplegable-ruralidad[open] .foto-coleccion-barrio:nth-child(5n + 3) {
+  animation-delay: 140ms;
+}
+
+.desplegable-urbanidad[open] .foto-coleccion-barrio:nth-child(5n + 4),
+.desplegable-ruralidad[open] .foto-coleccion-barrio:nth-child(5n + 4) {
+  animation-delay: 210ms;
+}
+
+.desplegable-urbanidad[open] .foto-coleccion-barrio:nth-child(5n),
+.desplegable-ruralidad[open] .foto-coleccion-barrio:nth-child(5n) {
+  animation-delay: 280ms;
+}
+
 .foto-paraiso:hover,
 .foto-coleccion-barrio:hover {
   transform: translateY(-3px);
@@ -1492,28 +1686,15 @@ body {
   text-align: left;
 }
 
-.metadatos-fotografia {
-  display: grid;
-  margin: 0;
-  gap: 5px;
-  color: rgba(244, 239, 232, 0.72);
-  font-size: 0.82rem;
-  text-align: left;
-}
-
-.metadatos-fotografia div {
-  display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: 8px;
-}
-
-.metadatos-fotografia dt {
-  color: var(--color-arena);
-  font-weight: 700;
-}
-
-.metadatos-fotografia dd {
-  margin: 0;
+@keyframes revelar-foto-coleccion {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .visor-galeria {
@@ -1614,11 +1795,6 @@ body {
   color: var(--color-arena-claro);
   font-family: "Bona Nova SC", serif;
   font-size: 1.15rem;
-}
-
-.visor-galeria .metadatos-fotografia {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 18px;
 }
 
 .lugar-grafiti .espacio-fotografia,
@@ -1898,64 +2074,31 @@ body {
 }
 
 .paisaje-ruralidad {
+  position: relative;
   display: block;
   min-width: 0;
-  min-height: 320px;
+  height: 320px;
   overflow: hidden;
-  background: linear-gradient(180deg, #617b71 0%, #b4a779 68%, #344d3a 100%);
 }
 
-.paisaje-ruralidad svg {
+.paisaje-ruralidad img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center 78%;
+  animation: movimiento-portada-ruralidad 22s ease-in-out infinite alternate;
 }
 
-.sol-ruralidad {
-  fill: #e6ca82;
-  filter: drop-shadow(0 0 16px rgba(230, 202, 130, 0.4));
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: sol-ruralidad-latido 5s ease-in-out infinite;
-}
-
-.montana-fondo-ruralidad {
-  fill: #718777;
-}
-
-.montana-media-ruralidad {
-  fill: #536f57;
-}
-
-.loma-ruralidad {
-  fill: #344f3c;
-}
-
-.surco-ruralidad {
-  fill: none;
-  stroke: rgba(192, 176, 113, 0.42);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 3 10;
-  animation: surcos-ruralidad 16s linear infinite;
-}
-
-.sendero-ruralidad {
-  fill: none;
-  stroke: #dfc991;
-  stroke-width: 5;
-  stroke-linecap: round;
-  stroke-dasharray: 2 12;
-  animation: sendero-ruralidad 9s linear infinite;
-}
-
-.rio-ruralidad {
-  fill: none;
-  stroke: rgba(177, 205, 184, 0.72);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 12 16;
-  animation: rio-ruralidad 11s linear infinite;
+@keyframes movimiento-portada-ruralidad {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.09);
+  }
 }
 
 .contenido-portada-ruralidad {
@@ -2021,113 +2164,20 @@ body {
 }
 
 .desplegable-ruralidad[open] .paisaje-ruralidad {
-  min-height: 230px;
-}
-
-.desplegable-ruralidad[open] .sendero-ruralidad,
-.desplegable-ruralidad[open] .rio-ruralidad,
-.desplegable-ruralidad[open] .surco-ruralidad {
-  animation-play-state: paused;
+  height: 230px;
 }
 
 .registros-ruralidad {
   display: none;
   min-width: 0;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  align-items: stretch;
 }
 
 .desplegable-ruralidad[open] .registros-ruralidad {
-  display: grid;
+  display: block;
 }
 
-.registro-ruralidad {
-  min-width: 0;
-  padding: 14px;
-  border: 1px solid rgba(185, 198, 138, 0.4);
-  background: linear-gradient(155deg, rgba(74, 99, 68, 0.32), rgba(36, 57, 47, 0.44));
-  text-align: left;
-  animation: entrada-registro-ruralidad 700ms ease-out both;
-}
-
-.registro-ruralidad:nth-child(2) {
-  animation-delay: 120ms;
-}
-
-.registro-ruralidad:nth-child(3) {
-  animation-delay: 240ms;
-}
-
-.numero-registro-ruralidad {
-  color: #c6c28e;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-}
-
-.registro-ruralidad h3 {
-  min-height: 2.8em;
-  margin: 8px 0 12px;
-  color: var(--color-arena-claro);
-  font-family: "Bona Nova SC", serif;
-  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
-  line-height: 1.3;
-}
-
-.registro-ruralidad .espacio-fotografia {
-  min-height: 130px;
-  aspect-ratio: 4 / 3;
-  background:
-    radial-gradient(ellipse at 50% 100%, rgba(166, 177, 119, 0.22), transparent 68%),
-    linear-gradient(160deg, #435c48, #263d32);
-}
-
-.registro-ruralidad p:last-child {
-  margin: 12px 0 0;
-  color: rgba(244, 239, 232, 0.76);
-  font-size: 0.85rem;
-  line-height: 1.5;
-}
-
-@keyframes sol-ruralidad-latido {
-  0%,
-  100% {
-    opacity: 0.82;
-    transform: scale(0.96);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.06);
-  }
-}
-
-@keyframes surcos-ruralidad {
-  to {
-    stroke-dashoffset: -104;
-  }
-}
-
-@keyframes sendero-ruralidad {
-  to {
-    stroke-dashoffset: -56;
-  }
-}
-
-@keyframes rio-ruralidad {
-  to {
-    stroke-dashoffset: 112;
-  }
-}
-
-@keyframes entrada-registro-ruralidad {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.encabezado-coleccion-ruralidad {
+  margin: 0 0 18px;
 }
 
 @keyframes pixeles-grafiti {
@@ -2516,15 +2566,7 @@ body {
 
   .paisaje-ruralidad,
   .desplegable-ruralidad[open] .paisaje-ruralidad {
-    min-height: 270px;
-  }
-
-  .registros-ruralidad {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .registro-ruralidad h3 {
-    min-height: 0;
+    height: 270px;
   }
 
   .marco-imagen-grafiti,
@@ -2597,7 +2639,7 @@ body {
 
   .paisaje-ruralidad,
   .desplegable-ruralidad[open] .paisaje-ruralidad {
-    min-height: 240px;
+    height: 240px;
   }
 
   .contenido-portada-urbanidad {
@@ -2606,10 +2648,6 @@ body {
 
   .contenido-portada-ruralidad {
     padding: 22px;
-  }
-
-  .registros-ruralidad {
-    grid-template-columns: 1fr;
   }
 
   .espacio-fotografia {
@@ -2626,6 +2664,7 @@ body {
   .portada-urbanidad,
   .desplegable-ruralidad,
   .portada-ruralidad,
+  .paisaje-ruralidad img,
   .icono-desplegar-grafiti,
   .icono-urbanidad,
   .icono-ruralidad,
@@ -2643,12 +2682,7 @@ body {
   .recorrido-urbanidad,
   .punto-urbanidad,
   .marcador-objeto-urbanidad,
-  .marcador-objeto-urbanidad::after,
-  .registro-ruralidad,
-  .sol-ruralidad,
-  .surco-ruralidad,
-  .sendero-ruralidad,
-  .rio-ruralidad {
+  .marcador-objeto-urbanidad::after {
     animation: none;
   }
 
@@ -2892,7 +2926,7 @@ body {
   inset: 0;
   background-image:
     linear-gradient(90deg, rgba(20, 40, 43, 0.84), rgba(20, 40, 43, 0.48) 55%, rgba(20, 40, 43, 0.78)),
-    url("imagenes/IMG_20250607_165832_235@-1854612948.jpg");
+    url("imagenes/IMG_20260621_175706_770@1647350922.jpg");
   background-size: cover;
   background-position: center 70%;
   content: "";
@@ -3186,6 +3220,83 @@ body {
   flex-wrap: wrap;
 }
 
+.nota-creditos-grafiti {
+  max-width: 64ch;
+  margin: 24px auto 0;
+  padding: 14px 18px;
+  border-left: 3px solid var(--color-arena);
+  background: rgba(36, 75, 85, 0.3);
+  color: rgba(244, 239, 232, 0.86);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  text-align: left;
+}
+
+.nota-creditos-grafiti a {
+  color: var(--color-arena);
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
+.nota-creditos-grafiti a:hover,
+.nota-creditos-grafiti a:focus-visible {
+  color: var(--color-arena-claro);
+}
+
+.boton-flotante-inicio,
+.boton-flotante-arriba {
+  position: fixed;
+  z-index: 1000;
+  right: max(16px, env(safe-area-inset-right));
+  display: inline-flex;
+  min-height: 48px;
+  padding: 0 16px;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(216, 195, 165, 0.78);
+  border-radius: 999px;
+  background: rgba(20, 40, 43, 0.94);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.32);
+  color: var(--color-arena-claro);
+  font-weight: 700;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.boton-flotante-inicio {
+  bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+.boton-flotante-arriba {
+  bottom: calc(max(16px, env(safe-area-inset-bottom)) + 58px);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.boton-flotante-inicio svg,
+.boton-flotante-arriba svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+}
+
+.boton-flotante-inicio:hover,
+.boton-flotante-inicio:focus-visible,
+.boton-flotante-arriba:hover,
+.boton-flotante-arriba:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--color-arena-claro);
+  background: #315d67;
+}
+
+.boton-flotante-inicio:focus-visible,
+.boton-flotante-arriba:focus-visible {
+  outline: 3px solid var(--color-arena-claro);
+  outline-offset: 3px;
+}
+
 @media (max-width: 560px) {
   .pagina-le-interesa .contenido-le-interesa {
     width: min(100% - 28px, 780px);
@@ -3221,8 +3332,11 @@ body {
   .pagina-le-interesa .seccion-para-ustedes::before,
   .pagina-le-interesa .seccion-para-ustedes h2,
   .pagina-repositorio-escritos::before,
-  .pagina-repositorio-escritos > h1 {
+  .pagina-repositorio-escritos > h1,
+  .boton-flotante-inicio,
+  .boton-flotante-arriba {
     animation: none;
+    transition: none;
     opacity: 1;
     transform: none;
   }

@@ -208,7 +208,6 @@
       <input type="checkbox" id="menu-toggle" class="menu-checkbox">
 
       <div class="opciones-menu">
-        <p class="subparrafo"><a href="espacios-recreativos.html">Espacios recreativos</a></p>
         <p class="subparrafo"><a href="fotografia.html">Fotografía en la localidad</a></p>
         <p class="subparrafo" id="final"><a href="repositorio-escritos.html">Repositorio de escritos</a></p>
       </div>
@@ -221,9 +220,37 @@
       <p>Este sitio nace desde la necesidad de brindar un espacio a la localidad 19 de Bogotá, esa que está rozando con el Sumapáz, con Usme, Bosa, Tunjuelito y Soacha. Esta localidad dio a luz una cultura local bastante viva y diversa, con memoria, tierra, arte y esfuerzo. Aquí buscamos recopilar historias, imágenes, recuerdos y voces que acompañan la vida cotidiana del barrio y del territorio.</p>
     </div>
 
+    <section class="coleccion-destacada-paraiso" aria-labelledby="titulo-destacado-paraiso">
+      <div class="enlace-destacado-paraiso">
+        <div class="carrusel-destacado-paraiso" aria-label="Primeras tres fotografías de Paraíso">
+          <div class="pista-destacado-paraiso" id="pista-destacado-paraiso">
+            <img src="Para%C3%ADso/Para%C3%ADso%201.jpg" alt="Fotografía 1 de la colección de Paraíso" loading="lazy">
+            <img src="Para%C3%ADso/Para%C3%ADso%202.jpg" alt="Fotografía 2 de la colección de Paraíso" loading="lazy" aria-hidden="true">
+            <img src="Para%C3%ADso/Para%C3%ADso%203.jpg" alt="Fotografía 3 de la colección de Paraíso" loading="lazy" aria-hidden="true">
+          </div>
+          <div class="controles-destacado-paraiso" role="group" aria-label="Controles de fotografías destacadas">
+            <button class="flecha-destacado-paraiso" type="button" aria-label="Fotografía anterior de Paraíso" aria-controls="pista-destacado-paraiso" disabled>&lsaquo;</button>
+            <div class="indicadores-destacado-paraiso" role="group" aria-label="Elegir fotografía destacada">
+              <button type="button" aria-label="Mostrar fotografía 1" aria-controls="pista-destacado-paraiso" aria-current="true"></button>
+              <button type="button" aria-label="Mostrar fotografía 2" aria-controls="pista-destacado-paraiso"></button>
+              <button type="button" aria-label="Mostrar fotografía 3" aria-controls="pista-destacado-paraiso"></button>
+            </div>
+            <button class="flecha-destacado-paraiso" type="button" aria-label="Fotografía siguiente de Paraíso" aria-controls="pista-destacado-paraiso">&rsaquo;</button>
+          </div>
+          <p class="estado-destacado-paraiso" aria-live="polite">Fotografía 1 de 3</p>
+        </div>
+        <span class="contenido-destacado-paraiso">
+          <span class="etiqueta-destacado-paraiso">Colección destacada · Grafiti</span>
+          <span class="titulo-destacado-paraiso" id="titulo-destacado-paraiso">Paraíso</span>
+          <span class="descripcion-destacado-paraiso">Explora los murales y rincones del barrio en su colección fotográfica.</span>
+          <a class="accion-destacado-paraiso" href="paraiso.html">Ir a la colección <span aria-hidden="true">&rarr;</span></a>
+        </span>
+      </div>
+    </section>
+
     <section class="seccion-audios" aria-labelledby="titulo-audios">
       <h2 id="titulo-audios">Escucha algunos testimonios:</h2>
-<p>Este espacio invita a escuchar las voces que conforman la localidad, quiénes han estado aquí desde el inicio y aún permancen. Los audios pertenecen a la cplección</p>
+<p>Este espacio invita a escuchar las voces que conforman la localidad, quiénes han estado aquí desde el inicio y aún permancen. Los audios son de la colección Marca de Agua de la entidad: red integrada de bibliotecas públicas Bibliored.</p>
       <details class="recuadro-audio">
         <summary>Los orígenes del barrio México</summary>
         <audio controls preload="none">
@@ -306,6 +333,7 @@
         <button class="indicador-carrusel" type="button" aria-label="Ir al video 3" aria-controls="carrusel-videos"></button>
       </div>
       <p class="indicacion-carrusel"><span aria-hidden="true">&larr;</span> Desliza para descubrir más videos <span aria-hidden="true">&rarr;</span></p>
+      <p class="nota-creditos-grafiti">Si eres autor o autora de alguno de los grafitis y quieres que incluyamos tus créditos, dirígete a <a href="le-podria-interesar.html">Le podría interesar</a> y deja un comentario.</p>
     </section>
   </section>
 
@@ -339,6 +367,42 @@
     const indicadoresVideo = [...document.querySelectorAll('.indicador-carrusel')];
     const comportamientoDesplazamiento = () =>
       window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+
+    const pistaDestacadaParaiso = document.getElementById('pista-destacado-paraiso');
+    const fotosDestacadasParaiso = [...pistaDestacadaParaiso.querySelectorAll('img')];
+    const indicadoresDestacadosParaiso = [...document.querySelectorAll('.indicadores-destacado-paraiso button')];
+    const botonesDestacadosParaiso = [...document.querySelectorAll('.flecha-destacado-paraiso')];
+    const estadoDestacadoParaiso = document.querySelector('.estado-destacado-paraiso');
+    let indiceDestacadoParaiso = 0;
+
+    const mostrarFotoDestacadaParaiso = (indice) => {
+      indiceDestacadoParaiso = Math.max(0, Math.min(indice, fotosDestacadasParaiso.length - 1));
+      fotosDestacadasParaiso.forEach((foto, posicion) => {
+        foto.style.transform = `translateX(${(posicion - indiceDestacadoParaiso) * 100}%)`;
+        foto.setAttribute('aria-hidden', String(posicion !== indiceDestacadoParaiso));
+      });
+      indicadoresDestacadosParaiso.forEach((indicador, posicion) => {
+        if (posicion === indiceDestacadoParaiso) {
+          indicador.setAttribute('aria-current', 'true');
+        } else {
+          indicador.removeAttribute('aria-current');
+        }
+      });
+      botonesDestacadosParaiso[0].disabled = indiceDestacadoParaiso === 0;
+      botonesDestacadosParaiso[1].disabled = indiceDestacadoParaiso === fotosDestacadasParaiso.length - 1;
+      estadoDestacadoParaiso.textContent = `Fotografía ${indiceDestacadoParaiso + 1} de ${fotosDestacadasParaiso.length}`;
+    };
+
+    botonesDestacadosParaiso.forEach((boton, indice) => {
+      boton.addEventListener('click', () => {
+        mostrarFotoDestacadaParaiso(indiceDestacadoParaiso + (indice === 0 ? -1 : 1));
+      });
+    });
+
+    indicadoresDestacadosParaiso.forEach((indicador, indice) => {
+      indicador.addEventListener('click', () => mostrarFotoDestacadaParaiso(indice));
+    });
+    mostrarFotoDestacadaParaiso(0);
 
     const actualizarControlesCarrusel = () => {
       const centroCarrusel = carruselVideos.getBoundingClientRect().left + carruselVideos.clientWidth / 2;
@@ -390,5 +454,6 @@
     actualizarControlesCarrusel();
 
   </script>
+  <script src="boton-inicio.js"></script>
 </body>
 </html>
